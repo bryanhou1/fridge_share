@@ -3,6 +3,7 @@
 <p>Hi, <%= current_user.email %></p>
 <p><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></p>
 <% else %>
-	<%= link_to('Log in with Facebook!', 'users/auth/facebook') %>
+	<%= link_to('Log in', new_user_session_path) %>
+	<!--<%= link_to('Log in with Facebook!', 'users/auth/facebook') %> -->
 <% end %>
 
