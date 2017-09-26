@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauth_providers => [:facebook]
 
-  belongs_to :fridge
+  has_many :user_fridges
+  has_many :fridges, through: :user_fridges
   has_many :items
 
   def self.from_omniauth(auth)
