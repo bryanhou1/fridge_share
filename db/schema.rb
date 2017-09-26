@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20170925195829) do
     t.string "uid"
     t.string "name"
     t.string "image"
-    t.integer "fridge_id"
+    t.integer "fridge_id", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fridge_id"], name: "index_users_on_fridge_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

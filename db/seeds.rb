@@ -8,9 +8,13 @@
 User.create([
 	{email: '1@1.c', password: '12345678'},
 	{email: '2@2.c', password: '12345678'}
-)
+])
 
 Fridge.create
 Fridge.create
 
-Item.create()
+Item.create([
+	{name: 'milk', expiration_date: "021717" },
+	{name: 'milk', expiration_date: "030117" }
+])
+
