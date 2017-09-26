@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauth_providers => [:facebook]
 
+  belongs_to :fridge
+  has_many :items
+
   def self.from_omniauth(auth)
   	
 	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -12,5 +15,6 @@ class User < ApplicationRecord
 	    user.name = auth.info.name
 	    user.image = auth.info.image
 	  end
+
   end
 end
