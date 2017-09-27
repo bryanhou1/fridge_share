@@ -1,9 +1,7 @@
 <h2><%= "Items in Fridge #{params[:id]}" %> </h2>
 <ul>
-	<% @fridge.users.each do |user| %>
-		<% user.items.each do |item| %>
-	 			<li><%=item.name%></li>
-		<% end %>
+	<% @fridge.items.each do |item| %>
+		<li><%=item.name%></li>
 	<% end %>  
 </ul>
 
