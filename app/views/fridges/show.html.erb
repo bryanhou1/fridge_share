@@ -1,0 +1,11 @@
+<h2><%= "Items in Fridge #{params[:id]}" %> </h2>
+<ul>
+	<% @fridge.users.each do |user| %>
+		<% user.items.each do |item| %>
+	 			<li><%=item.name%></li>
+		<% end %>
+	<% end %>  
+</ul>
+
+<%= link_to 'Edit', edit_fridge_path(@fridge) %> |
+<%= link_to 'Back', fridges_path %>

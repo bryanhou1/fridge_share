@@ -10,8 +10,8 @@ Fridge.create
 Fridge.create
 
 Item.create([
-	{name: 'milk', expiration_date: "021717" },
-	{name: 'milk', expiration_date: "030117" }
+	{name: 'milk', expiration_date: "021717",user_id: 1 },
+	{name: 'cookie', expiration_date: "030117",user_id: 1 }
 ])
 
 User.create([
