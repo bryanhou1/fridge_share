@@ -28,33 +28,26 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    if valid_date_format(item_params[:expiration_date])
       @item = Item.new(item_params)
 
       respond_to do |format|
-        if @item.save
+        if valid_date_format(item_params[:expiration_date]) && @item.save
           format.html { redirect_to @item, notice: 'Item was successfully created.' }
           format.json { render :show, status: :created, location: @item }
         else
+          #remember to make error msgs here #flash[:errors]
+
           format.html { render :new }
           format.json { render json: @item.errors, status: :unprocessable_entity }
         end
       end
-    else
-      format.html { render :new }
-      format.json { render json: @item.errors, status: :unprocessable_entity }
-    end
-
-
-
   end
 
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    binding.pry
     respond_to do |format|
-      if @item.update(item_params)
+      if valid_date_format(item_params[:expiration_date]) && @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -82,6 +75,8 @@ class ItemsController < ApplicationController
 
 
     def valid_date_format(date)
+      
+      return nil if date.length != 6 #strptime can still work if it has extraneous digits
       #not sure if there is a better way
       Date.strptime(date,'%m%d%y') rescue nil
     end
