@@ -5,6 +5,7 @@
     <tr>
       <th>Email</th>
       <th>Name</th>
+			<th colspan="2">Items</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -14,7 +15,10 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= user.name ? user.name: "Not provided" %></td>
+        <td><%= user.items.length %></td>
+        <td><%= link_to 'View', user_items_path(user) %></td>
         <td><%= link_to 'Show', user %></td>
+
         <td><%= link_to 'Edit', edit_user_registration_path(user) if current_user == user %></td>
       </tr>
     <% end %>

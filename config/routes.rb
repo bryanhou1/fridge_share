@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :fridges
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
-  resources :users do
-	  resources :items, only: [:index, :show, :new]
+  resources :users, only: [:index, :show] do
+	  resources :items, only: [:index, :show]
 	end
 
   root 'welcome#index'
