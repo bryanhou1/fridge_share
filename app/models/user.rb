@@ -19,6 +19,4 @@ class User < ApplicationRecord
 
   end
 
-  def index
-  end
 end
