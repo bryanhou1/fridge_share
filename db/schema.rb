@@ -28,13 +28,6 @@ ActiveRecord::Schema.define(version: 20170927170521) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "user_fridges", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "fridge_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

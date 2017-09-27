@@ -28,17 +28,25 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
+    if valid_date_format(item_params[:expiration_date])
+      @item = Item.new(item_params)
 
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @item.save
+          format.html { redirect_to @item, notice: 'Item was successfully created.' }
+          format.json { render :show, status: :created, location: @item }
+        else
+          format.html { render :new }
+          format.json { render json: @item.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      format.html { render :new }
+      format.json { render json: @item.errors, status: :unprocessable_entity }
     end
+
+
+
   end
 
   # PATCH/PUT /items/1
@@ -72,8 +80,15 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
 
+
+    def valid_date_format(date)
+      #not sure if there is a better way
+      Date.strptime(date,'%m%d%y') rescue nil
+    end
+
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :expiration_date, :user_id)
+      params.require(:item).permit(:name, :expiration_date, :user_id, :fridge_id)
     end
 end

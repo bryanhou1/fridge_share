@@ -22,9 +22,15 @@
   </div>
 
   <div class="field">
+    <%= f.label "Belongs to: " %>
     <%= f.collection_select :user_id, User.all, :id, :email, {selected: current_user} %>
   </div>
   
+  <div class="field">
+    <%= f.label "Fridge: " %>
+    <%= f.collection_select :fridge_id, Fridge.all, :id, :id %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

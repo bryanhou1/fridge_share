@@ -9,12 +9,15 @@
 Fridge.create
 Fridge.create
 
-Item.create([
-	{name: 'milk', expiration_date: "021717",user_id: 1 },
-	{name: 'cookie', expiration_date: "030117",user_id: 1 }
-])
-
 User.create([
 	{email: '1@1.c', password: '12345678'},
 	{email: '2@2.c', password: '12345678'}
+])
+
+Item.create([
+	{name: 'milk', expiration_date: "021717", user_id: 1, fridge_id: 2},
+	{name: 'cookie', expiration_date: "030117", user_id: 1, fridge_id: 1 },
+	{name: 'eggs', expiration_date: "030117", user_id: 1, fridge_id: 1},
+	{name: 'juice', expiration_date: "123117", user_id: 2, fridge_id: 1},
+	{name: 'mayo', expiration_date: "011517", user_id: 2, fridge_id: 2}
 ])
