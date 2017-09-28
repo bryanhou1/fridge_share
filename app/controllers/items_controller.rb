@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /items
   # GET /items.json
   def index
@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    # add
   end
 
   # GET /items/new
@@ -31,7 +32,7 @@ class ItemsController < ApplicationController
       @item = Item.new(item_params)
 
       respond_to do |format|
-        if valid_date_format(item_params[:expiration_date]) && @item.save
+        if @item.save
           format.html { redirect_to @item, notice: 'Item was successfully created.' }
           format.json { render :show, status: :created, location: @item }
         else
@@ -47,7 +48,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1.json
   def update
     respond_to do |format|
-      if valid_date_format(item_params[:expiration_date]) && @item.update(item_params)
+      if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -74,16 +75,12 @@ class ItemsController < ApplicationController
     end
 
 
-    def valid_date_format(date)
-      
-      return nil if date.length != 6 #strptime can still work if it has extraneous digits
-      #not sure if there is a better way
-      Date.strptime(date,'%m%d%y') rescue nil
-    end
-
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:name, :expiration_date, :user_id, :fridge_id)
+    end
+
+    def order_params
+      params.require(:item).permit(:name, :expiration_date, :id)
     end
 end

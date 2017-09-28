@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-    <% @items.each do |item| %>
+    <% @items.order(sessions[:order_by]).each do |item| %>
       <tr>
         <td><%= item.name %></td>
         <td><%= item.expiration_date %></td>
