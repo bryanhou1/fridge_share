@@ -18,7 +18,7 @@
         <td><%= user.items.length %></td>
         <td><%= link_to 'View', user_items_path(user) %></td>
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_registration_path(user) if current_user == user %></td>
+        <td><%= link_to 'Edit', edit_user_registration_path(user) if user.provider.nil? &&current_user == user %></td>
       </tr>
     <% end %>
   </tbody>
