@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= f.label "Belongs to: " %>
-    <%= f.collection_select :user_id, User.all, :id, :email, {selected: current_user} %>
+    <%= f.collection_select :user_id, User.all, :id, :email, {selected: current_user.id} %>
   </div>
   
   <div class="field">
     <%= f.label "Fridge: " %>
-    <%= f.collection_select :fridge_id, Fridge.all, :id, :id %>
+    <%= f.collection_select :fridge_id, Fridge.all, :id, :id, {selected: @item.fridge.try(:id)}  %>
   </div>
 
   <div class="actions">
