@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :items
   resources :fridges
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'users/registrations'}
   
   resources :users, only: [:index, :show] do
 	  resources :items, only: [:index, :show]
