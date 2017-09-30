@@ -1,7 +1,10 @@
 <h2><%= "Items in Fridge #{params[:id]}" %> </h2>
 <ul>
 	<% @fridge.items.each do |item| %>
-		<li><%=item.name%></li>
+		<li><%=item.name%>
+		<%= ' - expired! - ' if item.expired %>
+        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if current_user == item.user || item.expired %>
+		</li>
 	<% end %>  
 </ul>
 
