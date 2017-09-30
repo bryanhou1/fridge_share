@@ -15,7 +15,8 @@
         <td><%= fridge.id %></td>
         <td><%= link_to 'Show', fridge %></td>
         <td><%= link_to 'Edit', edit_fridge_path(fridge) %></td>
-        <td><%= link_to 'Destroy', fridge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- only show fridge destroy button when fridge is empty -->
+        <td><%= link_to 'Destroy', fridge, method: :delete, data: { confirm: 'Are you sure?' } if fridge.items == [] %></td>
       </tr>
     <% end %>
   </tbody>

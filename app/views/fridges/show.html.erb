@@ -3,7 +3,7 @@
 	<% @fridge.items.each do |item| %>
 		<li><%=item.name%>
 		<%= ' - expired! - ' if item.expired %>
-        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if current_user == item.user || item.expired %>
+        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure, this action will also destroy all items in the fridge?' } if current_user == item.user || item.expired %>
 		</li>
 	<% end %>  
 </ul>
