@@ -1,14 +1,8 @@
 <h1><%= "Fridge #{params[:id]} - #{@fridge.name}" %> </h1>
 
 <h2>Items</h2>
-<ul>
-	<% @fridge.items.each do |item| %>
-		<li><%=item.name%>
-		<%= ' - expired! - ' if item.expired %>
-        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure, this action will also destroy all items in the fridge?' } if current_user == item.user || item.expired %>
-		</li>
-	<% end %>  
-</ul>
+<% @items = @fridge.items #not sure why I can't pass it through locals%>
+<%= render 'items/show'#, items: @fridge.items %>
 
 <%= link_to 'Edit', edit_fridge_path(@fridge) %> |
 <%= link_to 'Back', fridges_path %>

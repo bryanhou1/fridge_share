@@ -1,26 +1,6 @@
 <h1>Items</h1>
 
-<table border=1 bordercolor=black>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Expiration date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= item.expiration_date %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item)  if current_user == item.user %></td>
-        <td><%= 'expired!' if item.expired %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if current_user == item.user || item.expired %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'show'%>
 
 <br>
 
