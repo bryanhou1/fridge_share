@@ -4,4 +4,12 @@ class Fridge < ApplicationRecord
 
 	def index
 	end
+
+  def fridge_form_identifier
+    if name
+      "#{id} - #{name}"
+    else
+      id
+    end
+  end
 end

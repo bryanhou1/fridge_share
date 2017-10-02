@@ -25,4 +25,11 @@ class User < ApplicationRecord
 
   end
 
+  def user_form_identifier
+    if name
+      "#{email} - #{name}"
+    else
+      email
+    end
+  end
 end
