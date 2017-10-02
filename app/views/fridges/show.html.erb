@@ -1,4 +1,6 @@
-<h2><%= "Items in Fridge #{params[:id]}" %> </h2>
+<h1><%= "Fridge #{params[:id]} - #{@fridge.name}" %> </h1>
+
+<h2>Items</h2>
 <ul>
 	<% @fridge.items.each do |item| %>
 		<li><%=item.name%>
