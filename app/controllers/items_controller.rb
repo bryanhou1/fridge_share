@@ -80,7 +80,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:name, :expiration_date, :user_id, :fridge_id, fridge_attributes: [:name])
     end
 
-    def order_params
-      params.require(:item).permit(:name, :expiration_date, :id)
-    end
+    # def order_params
+    #   params.require(:item).permit(:name, :expiration_date, :id)
+    # end
 end

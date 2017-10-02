@@ -70,6 +70,6 @@ class FridgesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fridge_params
-      params.fetch(:fridge, {})
+      params.require(:fridge).permit(:name)
     end
 end
