@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Fridge ID</th>
+      <th>Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
     <% @fridges.each do |fridge| %>
       <tr>
         <td><%= fridge.id %></td>
+        <td><%= fridge.name %></td>
         <td><%= link_to 'Show', fridge %></td>
         <td><%= link_to 'Edit', edit_fridge_path(fridge) %></td>
         <!-- only show fridge destroy button when fridge is empty -->

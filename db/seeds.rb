@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Fridge.create
-Fridge.create
+Fridge.create(name: 'for produce')
+Fridge.create(name: 'apt 301')
 
 User.create([
 	{email: '1@1.c', password: '12345678'},
