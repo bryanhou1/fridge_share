@@ -20,6 +20,12 @@ class Item < ApplicationRecord
 		expiration_date_arr[2] == Item.today[2] && expiration_date_arr[0] == Item.today[0] && expiration_date_arr[1] < Item.today[1])
 	end
 
+  def fridge_attributes=(fridge_attributes)
+    if fridge_attributes.values.none? {|value| value == ""}
+      fridge = Fridge.find_or_create_by(fridge_attributes)
+      self.fridge = fridge
+    end
+  end
 	private
 
 	def self.today

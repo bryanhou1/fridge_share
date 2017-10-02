@@ -25,10 +25,17 @@
     <%= f.label "Belongs to: " %>
     <%= f.collection_select :user_id, User.all, :id, :email, {selected: current_user.id} %>
   </div>
-  
+        
   <div class="field">
     <%= f.label "Fridge: " %>
-    <%= f.collection_select :fridge_id, Fridge.all, :id, :id, {selected: @item.fridge.try(:id)}  %>
+    <%= f.collection_select :fridge_id, Fridge.all, :id, :id, {selected: @item.fridge.try(:id), include_blank: "Add new" } %>
+  </div>
+
+  <div class="field">
+    <%= f.fields_for :fridge_attributes do |fridge_fields| %>
+        <%= fridge_fields.label "Create new fridge to place item:" %></br>
+        <%= fridge_fields.text_field :name %></br>
+    <% end %>
   </div>
 
   <div class="actions">
