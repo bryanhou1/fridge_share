@@ -1,34 +1,36 @@
-<%= form_tag("/items", method: "delete") do %>
-  <table border=1 bordercolor=black>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Expiration date</th>
-        <th colspan="4"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% items.each do |item| %>
+<% if items.empty?%>
+  <em>no items.</em>
+<% else %>
+  <%= form_tag("/items", method: "delete") do %>
+    <table border=1 bordercolor=black>
+      <thead>
         <tr>
-          <td><%= item.name %></td>
-          <td><%= item.expiration_date %></td>
-          <td><%= link_to 'Show', item %></td>
-          <td><%= link_to 'Edit', edit_item_path(item) if current_user == item.user %></td>
-          <td>
-            <% if item.expired %>
-            <%= check_box_tag 'expired_item_ids[]', item.id, 'checked', style: 'visibility: hidden'%>
-            <%= 'expired!' %>
-            <% end %>
-          </td>
-          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if current_user == item.user || item.expired %></td>
+          <th>Name</th>
+          <th>Expiration date</th>
+          <th colspan="4"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% items.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.expiration_date %></td>
+            <td><%= link_to 'Show', item %></td>
+            <td><%= link_to 'Edit', edit_item_path(item) if current_user == item.user %></td>
+            <td>
+              <% if item.expired %>
+              <%= check_box_tag 'expired_item_ids[]', item.id, 'checked', style: 'visibility: hidden'%>
+              <%= 'expired!' %>
+              <% end %>
+            </td>
+            <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if current_user == item.user || item.expired %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
+    <%= submit_tag("Destroy all expired above") if items.expired_items %>
+  <% end %>
 
-
-  <%= submit_tag("Destroy all expired above") %>
 <% end %>
-
 
