@@ -11,7 +11,9 @@ Fridge.create(name: 'apt 301')
 
 User.create([
 	{email: '1@1.c', password: '12345678', name: "Aaron"},
-	{email: '2@2.c', password: '12345678', name: "Shane"}
+	{email: '2@2.c', password: '12345678', name: "Bob"},
+	{email: '3@3.c', password: '12345678', name: "Christina"},
+	{email: '4@4.c', password: '12345678', name: "Davis"},
 ])
 
 Item.create([
@@ -19,5 +21,7 @@ Item.create([
 	{name: 'cookie', expiration_date: "030117", user_id: 1, fridge_id: 1 },
 	{name: 'eggs', expiration_date: "030117", user_id: 1, fridge_id: 1},
 	{name: 'juice', expiration_date: "123117", user_id: 2, fridge_id: 1},
-	{name: 'mayo', expiration_date: "011517", user_id: 2, fridge_id: 2}
+	{name: 'mayo', expiration_date: "011517", user_id: 2, fridge_id: 2},
+	{name: 'ham', expiration_date: "051518", user_id: 4, fridge_id: 2},
+	{name: 'cheese', expiration_date: "010111", user_id: 3, fridge_id: 1}
 ])
