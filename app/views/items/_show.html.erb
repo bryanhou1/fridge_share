@@ -20,6 +20,7 @@
             <td><%= link_to 'Edit', edit_item_path(item) if current_user == item.user %></td>
             <td>
               <% if item.expired && user_signed_in? %>
+              <!-- how to use hidden_field -->
               <%= check_box_tag 'expired_item_ids[]', item.id, 'checked', style: 'visibility: hidden'%>
               <% has_expired_item = true %>
 

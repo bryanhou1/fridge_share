@@ -6,12 +6,17 @@ class Item < ApplicationRecord
 
 
 	def self.expired_items
-		all.collect { |item| 
+		expired_item_ids = all.collect { |item| 
 			expiration_date_arr = item.expiration_date.scan(/.{1,2}/).map { |s| s.to_i }
-			item if item.expired
+			item.id if item.expired
 		}.uniq.compact
+		where(id: expired_item_ids)
 	end
 
+	def self.by_fridge_id
+		order(:fridge_id)
+	end
+	
 	def expired
 		expiration_date_arr = expiration_date.scan(/.{1,2}/).map { |s| s.to_i }
 
