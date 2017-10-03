@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 	end
 
   root 'welcome#index'
-  # get '/auth/facebook/callback' => 'sessions#create'
   get '/about' => 'welcome#about'
   get '/users' => 'users#index'
   get '/expired_items' => 'items#show_expired'
