@@ -3,4 +3,39 @@
 <%= render partial: 'items/show', locals: {items: Item.all} %>
 
 <h2>By Fridge</h2>
+<table border=1 bordercolor=black>
+	<thead>
+		<tr>
+			<% Fridge.all.each do |fridge| %>
+			<th><%=fridge.name%></th>
+			<% end %>
+		</tr>
+	</thead>
+    <tbody>
+    	<% Fridge.all.each do |fridge| %>
+        <td>
+        	<%= render partial: 'items/show', locals: {items: fridge.items} %>	
+        </td>
+        <% end %>
+    </tbody>
+  </table>
+
+
 <h2>By User</h2>
+
+<table border=1 bordercolor=black>
+	<thead>
+		<tr>
+			<% User.all.each do |user| %>
+			<th><%=user.name%></th>
+			<% end %>
+		</tr>
+	</thead>
+    <tbody>
+    	<% User.all.each do |user| %>
+        <td>
+        	<%= render partial: 'items/show', locals: {items: user.items} %>	
+        </td>
+        <% end %>
+    </tbody>
+  </table>
