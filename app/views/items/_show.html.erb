@@ -19,19 +19,19 @@
             <td><%= link_to 'Show', item %></td>
             <td><%= link_to 'Edit', edit_item_path(item) if current_user == item.user %></td>
             <td>
-              <% if item.expired %>
+              <% if item.expired && user_signed_in? %>
               <%= check_box_tag 'expired_item_ids[]', item.id, 'checked', style: 'visibility: hidden'%>
               <% has_expired_item = true %>
 
               <%= 'expired!' %>
               <% end %>
             </td>
-            <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if current_user == item.user || item.expired %></td>
+            <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? && (current_user == item.user || item.expired) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <%= submit_tag("Destroy all expired above") if has_expired_item %>
+    <%= submit_tag("Destroy all expired above") if user_signed_in? &&has_expired_item %>
   <% end %>
 
 <% end %>
