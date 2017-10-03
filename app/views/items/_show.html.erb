@@ -11,6 +11,7 @@
         </tr>
       </thead>
       <tbody>
+        <% has_expired_item = false %>
         <% items.each do |item| %>
           <tr>
             <td><%= item.name %></td>
@@ -20,6 +21,8 @@
             <td>
               <% if item.expired %>
               <%= check_box_tag 'expired_item_ids[]', item.id, 'checked', style: 'visibility: hidden'%>
+              <% has_expired_item = true %>
+
               <%= 'expired!' %>
               <% end %>
             </td>
@@ -28,7 +31,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= submit_tag("Destroy all expired above") if @items.class!=Array && @items.expired_items!=[] %>
+    <%= submit_tag("Destroy all expired above") if has_expired_item %>
   <% end %>
 
 <% end %>
