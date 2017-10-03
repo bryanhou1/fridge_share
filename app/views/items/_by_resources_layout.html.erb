@@ -4,7 +4,6 @@
 			<% resources.each do |resource| %>
 			<th>
                 <%=resource.try(:email) ? "#{resource.name} - #{resource.email}":resource.name %>
-                    
             </th>
 			<% end %>
 		</tr>
@@ -12,7 +11,7 @@
     <tbody>
     	<% resources.each do |resource| %>
         <td>
-        	<%= render partial: 'items/show', locals: {items: resource.items} %>
+        	<%= render partial: 'items/show', locals: {items: resource.items.expired_items} %>
         </td>
         <% end %>
     </tbody>

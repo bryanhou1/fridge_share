@@ -28,8 +28,7 @@
         <% end %>
       </tbody>
     </table>
-
-    <%= submit_tag("Destroy all expired above") if items.expired_items %>
+    <%= submit_tag("Destroy all expired above") if @items.class!=Array && @items.expired_items!=[] %>
   <% end %>
 
 <% end %>
