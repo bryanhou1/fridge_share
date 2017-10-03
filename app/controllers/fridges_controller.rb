@@ -10,7 +10,6 @@ class FridgesController < ApplicationController
   # GET /fridges/1
   # GET /fridges/1.json
   def show
-    @fridge = Fridge.find(params[:id])
   end
 
   # GET /fridges/new

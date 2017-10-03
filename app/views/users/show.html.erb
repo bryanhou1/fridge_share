@@ -6,9 +6,8 @@
 
 
 <h2>Items</h2>
-<% @items = @user.items %><!--  not sure why I can't pass it through locals -->
 
-<%= render 'items/show' %><!-- , items: @fridge.items  -->
+<%= render partial: 'items/show', locals: {items: @user.items}%>
 
 <%= link_to 'Edit', edit_user_registration_path(@user) %> |
 <%= link_to 'Back', users_path %>

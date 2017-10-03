@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
   resources :items
-
-
   resources :fridges
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'users/registrations'}
   
@@ -14,6 +12,6 @@ Rails.application.routes.draw do
   # get '/auth/facebook/callback' => 'sessions#create'
   get '/about' => 'welcome#about'
   get '/users' => 'users#index'
-
+  get '/expired_items' => 'items#show_expired'
   delete '/items' => 'items#destroy_collection'
 end

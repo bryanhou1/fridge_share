@@ -16,6 +16,9 @@ class ItemsController < ApplicationController
   def show
   end
 
+  def show_expired
+  end
+
   # GET /items/new
   def new
     @item = Item.new
