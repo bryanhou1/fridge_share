@@ -10,8 +10,8 @@ Fridge.create(name: 'for produce')
 Fridge.create(name: 'apt 301')
 
 User.create([
-	{email: '1@1.c', password: '12345678'},
-	{email: '2@2.c', password: '12345678'}
+	{email: '1@1.c', password: '12345678', name: "Aaron"},
+	{email: '2@2.c', password: '12345678', name: "Shane"}
 ])
 
 Item.create([

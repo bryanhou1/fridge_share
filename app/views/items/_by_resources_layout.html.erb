@@ -2,14 +2,17 @@
 	<thead>
 		<tr>
 			<% resources.each do |resource| %>
-			<th><%=resource.name%></th>
+			<th>
+                <%=resource.try(:email) ? "#{resource.name} - #{resource.email}":resource.name %>
+                    
+            </th>
 			<% end %>
 		</tr>
 	</thead>
     <tbody>
     	<% resources.each do |resource| %>
         <td>
-        	<%= render partial: 'items/show', locals: {items: resource.items} %>	
+        	<%= render partial: 'items/show', locals: {items: resource.items} %>
         </td>
         <% end %>
     </tbody>
