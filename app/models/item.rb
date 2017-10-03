@@ -6,11 +6,10 @@ class Item < ApplicationRecord
 
 
 	def self.expired_items
-
 		all.collect { |item| 
 			expiration_date_arr = item.expiration_date.scan(/.{1,2}/).map { |s| s.to_i }
 			item if item.expired
-		}.uniq
+		}.uniq.compact
 	end
 
 	def expired
