@@ -1,6 +1,6 @@
 <h1>Expired Items</h1>
 <h2>All</h2>
-<%= render partial: 'items/show', locals: {items: Item.expired_items} %>
+<%= render partial: 'items/show', locals: {items: Item.expired_items.order_by_name} %>
 
 <h2>By Fridge</h2>
 <%= render partial: 'items/by_resources_layout', locals: {resources: Fridge.all} %>

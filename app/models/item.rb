@@ -13,10 +13,10 @@ class Item < ApplicationRecord
 		where(id: expired_item_ids)
 	end
 
-	def self.by_fridge_id
-		order(:fridge_id)
+	def self.order_by_name
+		order(:name)
 	end
-	
+
 	def expired
 		expiration_date_arr = expiration_date.scan(/.{1,2}/).map { |s| s.to_i }
 
