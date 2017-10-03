@@ -1,8 +1,9 @@
 <h1><%= "Fridge #{params[:id]} - #{@fridge.name}" %> </h1>
 
 <h2>Items</h2>
-<% @items = @fridge.items #not sure why I can't pass it through locals%>
-<%= render 'items/show'#, items: @fridge.items %>
+<% @items = @fridge.items %><!--  not sure why I can't pass it through locals -->
+
+<%= render 'items/show'%><!-- , items: @fridge.items  -->
 
 <%= link_to 'Edit', edit_fridge_path(@fridge) %> |
 <%= link_to 'Back', fridges_path %>

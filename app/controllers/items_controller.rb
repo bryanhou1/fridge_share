@@ -68,6 +68,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy_collection
+    Item.where(id: params[:expired_item_ids]).destroy_all
+    respond_to do |format|
+      format.html { redirect_to items_url, notice: 'Items were successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -78,6 +86,7 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:name, :expiration_date, :user_id, :fridge_id, fridge_attributes: [:name])
+      # params.require(:items)
     end
 
     # def order_params

@@ -1,1 +1,14 @@
-show.html.erb
+<h1><%= "User #{params[:id]}" %> </h1>
+
+<div>Name: <%= @user.name ? @user.name : "Not Provided" %></div>
+<br>
+<div>Email: <%= @user.email %></div>
+
+
+<h2>Items</h2>
+<% @items = @user.items %><!--  not sure why I can't pass it through locals -->
+
+<%= render 'items/show' %><!-- , items: @fridge.items  -->
+
+<%= link_to 'Edit', edit_user_registration_path(@user) %> |
+<%= link_to 'Back', users_path %>

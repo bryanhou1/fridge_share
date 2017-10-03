@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   resources :items
+
+
   resources :fridges
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'users/registrations'}
   
@@ -13,5 +15,5 @@ Rails.application.routes.draw do
   get '/about' => 'welcome#about'
   get '/users' => 'users#index'
 
-
+  delete '/items' => 'items#destroy_collection'
 end
