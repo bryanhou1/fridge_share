@@ -1,24 +1,44 @@
-# README
+# Fridge Share
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Fridge Share is an content management web app created to help users keep track of their groceries sitting in their fridges. By having a list of items of what you keep in the fridge, cutting down on food waste becomes significantly easier.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* System dependencies
+### Installing
 
-* Configuration
+Clone the repository
 
-* Database creation
+```
+git clone git@github.com:bryanhou1/fridge_share.git
+```
 
-* Database initialization
+Install the gems
 
-* How to run the test suite
+```
+bundle install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Start the server
 
-* Deployment instructions
+```
+rails s
+```
 
-* ...
+Access the app at http://localhost:3000. 
+
+If testing, there are some testing data provided in [db/seeds.rb](CONTRIBUTING.md).
+To use, run:
+``` 
+rake db:seed
+```
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) file for details
+
