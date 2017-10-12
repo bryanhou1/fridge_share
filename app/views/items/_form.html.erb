@@ -23,7 +23,11 @@
 
   <div class="field">
     <%= f.label "Belongs to: " %>
-    <%= f.collection_select :user_id, User.all, :id, :user_form_identifier, {selected: current_user.id} %>
+    <% if user %>
+       <%= f.collection_select :user_id, User.all, :id, :user_form_identifier, {selected: user.id}, {disabled: "disabled"} %>
+    <% else %>
+      <%= f.collection_select :user_id, User.all, :id, :user_form_identifier, {selected: current_user.id} %>
+    <%end %>
   </div>
         
   <div class="field">
