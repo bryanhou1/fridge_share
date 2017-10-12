@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   def index
     if params[:user_id]
       @items = Item.where(user_id: params[:user_id])
+      @user = User.find(params[:user_id])
     else
       @items = Item.all
     end

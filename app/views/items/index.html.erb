@@ -1,4 +1,9 @@
 <h1>Items</h1>
 <%= render partial: 'show', locals: {items: @items}%>
 <br>
-<%= link_to 'New Item', new_item_path %>
+
+<% if @user %>
+	<%=link_to 'New Item for the user', new_user_item_path%>
+<% else %>
+	<%= link_to 'New Item', new_item_path %>
+<% end %>
