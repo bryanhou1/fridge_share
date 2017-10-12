@@ -1,6 +1,6 @@
 # Fridge Share
 
-Fridge Share is an content management web app created to help users keep track of their groceries sitting in their fridges. By having a list of items of what you keep in the fridge, cutting down on food waste becomes significantly easier.
+Fridge Share is a content management web app created to help users keep track of their groceries sitting in their fridges. By having a list of items of what you keep in the fridge, cutting down on food waste becomes significantly easier.
 
 ## Getting Started
 
