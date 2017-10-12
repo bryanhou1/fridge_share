@@ -33,21 +33,16 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-      @item = Item.new(item_params)
-      respond_to do |format|
-        if @item.save
-          format.html { redirect_to @item, notice: 'Item was successfully created.' }
-          format.json { render :show, status: :created, location: @item }
-        else
-          # if @item.user_id
-            # format.html{ redirect_to new_user_item_path(@item.user_id) }
-          #   render "/users/4/items/new"
-          # else
-            format.html { render :new }
-          # end
-          format.json { render json: @item.errors, status: :unprocessable_entity }
-        end
+    @item = Item.new(item_params)
+    respond_to do |format|
+      if @item.save
+        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+        format.json { render :show, status: :created, location: @item }
+      else
+        format.html { render :new }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   # PATCH/PUT /items/1
