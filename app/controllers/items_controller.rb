@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id]) if params[:user_id]
   end
 
   # GET /items/1/edit
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
           format.json { render :show, status: :created, location: @item }
         else
           #remember to make error msgs here #flash[:error]
-
+          binding.pry
           format.html { render :new }
           format.json { render json: @item.errors, status: :unprocessable_entity }
         end
