@@ -1,6 +1,26 @@
-<%= link_to 'Home', root_path %>
-<%= link_to 'About', about_path%>
-<%= link_to 'Fridges', fridges_path %>
-<%= link_to 'Users', users_path %>
-<%= link_to 'Items', items_path%>
-<%= link_to 'Expired items', '/expired_items' %>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+
+  <a class="navbar-brand" href="#">Fridge Share</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+  		<li class="nav-item">
+				<%= link_to 'Home', root_path, {class: "nav-link"} %>
+			</li>
+			<li class="nav-item">
+				<%= link_to 'About', about_path, {class: "nav-link"} %>
+			</li>
+			<li class="nav-item">
+				<%= link_to 'Fridges', fridges_path , {class: "nav-link"} %>
+			</li>
+			<li class="nav-item">
+				<%= link_to 'Users', users_path , {class: "nav-link"} %>
+			</li>
+			<li class="nav-item">
+				<%= link_to 'Items', items_path, {class: "nav-link"} %>
+			</li>
+			<li class="nav-item">
+				<%= link_to 'Expired items', '/expired_items', {class: "nav-link"} %>
+			</li>
+    </ul>
+  </div>
+</nav>

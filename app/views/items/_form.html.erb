@@ -26,6 +26,7 @@
     <% if user %>
       <%= user.user_form_identifier %>
       <%= f.collection_select :user_id, User.all, :id, :user_form_identifier, {selected: user.id}, {hidden: "hidden"} %>
+      
     <% else %>
       <%= f.collection_select :user_id, User.all, :id, :user_form_identifier, {selected: current_user.id} %>
     <%end %>
