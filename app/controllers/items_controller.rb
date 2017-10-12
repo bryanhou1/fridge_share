@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-    @user = false;
   end
 
   # POST /items
