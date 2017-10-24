@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    @user = User.find(params[:user_id]) if params[:user_id]
+    @user = User.find(param[:user_id]) if params[:user_id]
   end
 
   # GET /items/1/edit
@@ -48,6 +48,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
