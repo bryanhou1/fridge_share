@@ -10,11 +10,20 @@ class ItemsController < ApplicationController
     else
       @items = Item.all
     end
+
+    respond_to do |format|
+      format.html {render :index }
+      format.json {render json: @items }
+    end
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @item }
+    end
   end
 
   def show_expired

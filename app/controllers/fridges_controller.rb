@@ -5,11 +5,19 @@ class FridgesController < ApplicationController
   # GET /fridges.json
   def index
     @fridges = Fridge.all
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @fridges}
+    end
   end
 
   # GET /fridges/1
   # GET /fridges/1.json
   def show
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @fridge}
+    end
   end
 
   # GET /fridges/new
