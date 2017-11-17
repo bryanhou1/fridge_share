@@ -2,13 +2,13 @@ $(attachListeners);
 
 function attachListeners() {
 	$("#show_fridges_btn").on("click", () => {
-		loadFridges()
-		hideFridgesBtn()
+		loadFridges();
+		hideFridgesBtn();
 	})
 }
 
 function hideFridgesBtn() {
-
+	$("#show_fridges_btn").remove();
 }
 
 function loadFridges() {
