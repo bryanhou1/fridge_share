@@ -3,11 +3,13 @@ $(init);
 function init() {
 	$.get("fridges.json", function(data) {
 		let fridges = data.map((fridge_attr) => { return new Fridge(fridge_attr)})
-
-		console.log(fridges);
+		fridges.forEach((fridge) => {
+			$("ul#fridges").append(fridge.toHtmlLi())
+		})
+		
 		})
 
-	console.log("get fridges in json format")
+	// console.log("get fridges in json format")
 }
 
 class Fridge {
