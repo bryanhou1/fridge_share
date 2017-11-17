@@ -1,17 +1,24 @@
-$(init);
+$(attachListeners);
 
-function init() {
+function attachListeners() {
+	$("#show_fridges_btn").on("click", () => {
+		loadFridges()
+		hideFridgesBtn()
+	})
+}
+
+function hideFridgesBtn() {
+
+}
+
+function loadFridges() {
 	$.get("fridges.json", function(data) {
 		let fridges = data.map((fridge_attr) => { return new Fridge(fridge_attr)})
 		fridges.forEach((fridge) => {
-			$("ul#fridges").append(fridge.toHtmlLi())
+			$("ul#fridges_li").append(fridge.toHtmlLi())
 		})
-		
-		})
-
-	// console.log("get fridges in json format")
+	})
 }
-
 class Fridge {
 	constructor (fridge_attr) {
 		this.id = fridge_attr.id
