@@ -1,6 +1,13 @@
 <h1>Fridges</h1>
 
-<table border=1 bordercolor=black>
+
+<ul id="fridges" >
+
+</ul>
+
+
+
+<!-- <table border=1 bordercolor=black>
   <thead>
     <tr>
       <th>Fridge ID</th>
@@ -17,12 +24,12 @@
         <td><%= fridge.name %></td>
         <td><%= link_to 'Show', fridge %></td>
         <td><%= link_to 'Edit', edit_fridge_path(fridge) %></td>
-        <!-- only show fridge destroy button when fridge is empty -->
+        
         <td><%= link_to 'Destroy', fridge, method: :delete, data: { confirm: 'Are you sure?' } if fridge.items == [] %></td>
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
 
 <br>
 
