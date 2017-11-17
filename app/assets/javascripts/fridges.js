@@ -23,7 +23,16 @@ class Fridge {
 		return `<li id="fridge-${this.id}">
 			Fridge ID: ${this.id} <br />
 			Name: ${this.name} <br />
-			Comments: **TO BE ADDED** <br />
+			Comments: **TO BE ADDED** <br /><br />
+
+			New Comment: <br/> <textarea/>
+			<br/>
+			<button onClick=""> Submit </button> 
+
+			<br /><br />
+			<a href="fridges/${this.id}">Show</a>
+			<a href="fridges/${this.id}/edit">Edit</a>
+			<br /><br />
 		</li>`
 	}
 }
