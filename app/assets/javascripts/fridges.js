@@ -65,6 +65,14 @@ class Fridge {
 			Name: ${this.name} <br />
 			Items: 
 			${itemsHTML}
+			Comments: **TO BE ADDED** <br />
+
+			New Comment: <br/> <textarea/>
+			<br/>
+			<button onClick=""> Submit </button> 
+
+			<br /><br />
+
 			<br />
 		</div>`;
 		//dont forget about comments later
@@ -74,15 +82,8 @@ class Fridge {
 		return `<li id="fridge-${this.id}">
 			Fridge ID: ${this.id} <br />
 			Name: ${this.name} <br />
-			Comments: **TO BE ADDED** <br /><br />
-
-			New Comment: <br/> <textarea/>
-			<br/>
-			<button onClick=""> Submit </button> 
-
-			<br /><br />
-			<a href="fridges/${this.id}">Show</a>
-			<a class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</a>
+			<a href="fridges/${this.id}">Show</a> | 
+			<a class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</a> | 
 			<a href="fridges/${this.id}/edit">Edit</a>
 			<br /><br />
 		</li>`
