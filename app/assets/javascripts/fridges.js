@@ -33,12 +33,23 @@ function showFridgeListener() {
 	})
 }
 
+function displayFridge(fridge){
+	const fridgeHTML = fridge.toDetailedView();
+	$("div#display_fridge").html(fridgeHTML);
+}
+
+
+
 class Fridge {
 	constructor (fridge_attr) {
 		this.id = fridge_attr.id
 		this.name = fridge_attr.name
 		this.items = fridge_attr.items
 		//add comments later on
+	}
+
+	toDetailedView() {
+		return ``;
 	}
 
 	toHtmlLi() {
@@ -53,7 +64,7 @@ class Fridge {
 
 			<br /><br />
 			<a href="fridges/${this.id}">Show</a>
-			<button class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</button>
+			<a class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</a>
 			<a href="fridges/${this.id}/edit">Edit</a>
 			<br /><br />
 		</li>`
