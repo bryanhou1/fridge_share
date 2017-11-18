@@ -1,28 +1,40 @@
-$(attachListeners);
+let fridges;
 
-function attachListeners() {
-	$("#show_fridges_btn").on("click", () => {
-		loadFridges();
-		hideFridgesBtn();
+$(() => {
+	getFridges().done(()=> {
+			showFridges();
+	});
+
+});
+
+
+function hideBtn(btn) {
+	btn.remove();
+}
+
+function getFridges() {
+	return $.get("/fridges.json", function(data) {
+		fridges = data.map((fridge_attr) => { return new Fridge(fridge_attr)})
 	})
 }
 
-function hideFridgesBtn() {
-	$("#show_fridges_btn").remove();
-}
-
-function loadFridges() {
-	$.get("fridges.json", function(data) {
-		let fridges = data.map((fridge_attr) => { return new Fridge(fridge_attr)})
-		fridges.forEach((fridge) => {
-			$("ul#fridges_li").append(fridge.toHtmlLi())
-		})
+function showFridges() {
+	fridges.forEach((fridge) => {
+		$("ul#fridges_li").append(fridge.toHtmlLi())
 	})
 }
+
+function showFridge() {
+	$("#show_fridge").on("click", () => {
+		loadFridge();
+	})
+}
+
 class Fridge {
 	constructor (fridge_attr) {
 		this.id = fridge_attr.id
 		this.name = fridge_attr.name
+		this.items = fridge_attr.items
 		//add comments later on
 	}
 
@@ -37,7 +49,7 @@ class Fridge {
 			<button onClick=""> Submit </button> 
 
 			<br /><br />
-			<a href="fridges/${this.id}">Show</a>
+			<a href="fridges/${this.id}" id= data-fridge-id="${this.id}">Show</a>
 			<a href="fridges/${this.id}/edit">Edit</a>
 			<br /><br />
 		</li>`
