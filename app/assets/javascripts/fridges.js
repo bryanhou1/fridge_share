@@ -49,7 +49,25 @@ class Fridge {
 	}
 
 	toDetailedView() {
-		return ``;
+		//maybe should move it into a Items Javascript object model
+		let itemsHTML = '<ul>';
+		this.items.forEach((item) => {
+			itemsHTML += `<li>ID: ${item.id} <br>
+												Name: ${item.name} <br>
+												Expiration date: ${item.expiration_date}
+										</li>`
+		})
+
+		itemsHTML += "</ul>"
+
+		return `<div>
+			Fridge ID: ${this.id} <br />
+			Name: ${this.name} <br />
+			Items: 
+			${itemsHTML}
+			<br />
+		</div>`;
+		//dont forget about comments later
 	}
 
 	toHtmlLi() {
