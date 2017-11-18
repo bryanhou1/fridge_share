@@ -22,11 +22,14 @@ function showFridges() {
 	fridges.forEach((fridge) => {
 		$("ul#fridges_li").append(fridge.toHtmlLi())
 	})
+	showFridgeListener();
 }
 
-function showFridge() {
-	$("#show_fridge").on("click", () => {
-		loadFridge();
+function showFridgeListener() {
+	$(".show_fridge_btn").on("click", (e)=> {
+		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
+		let fridge = fridges.find((fridge) => fridge.id === targetId);
+		displayFridge(fridge);
 	})
 }
 
@@ -49,7 +52,8 @@ class Fridge {
 			<button onClick=""> Submit </button> 
 
 			<br /><br />
-			<a href="fridges/${this.id}" id= data-fridge-id="${this.id}">Show</a>
+			<a href="fridges/${this.id}">Show</a>
+			<button class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</button>
 			<a href="fridges/${this.id}/edit">Edit</a>
 			<br /><br />
 		</li>`
