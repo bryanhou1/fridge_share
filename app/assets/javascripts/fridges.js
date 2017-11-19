@@ -45,7 +45,7 @@ class Fridge {
 		this.id = fridge_attr.id
 		this.name = fridge_attr.name
 		this.items = fridge_attr.items
-		//add comments later on
+		this.comments = fridge_attr.fridge_comments;
 	}
 
 	toDetailedView() {
