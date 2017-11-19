@@ -50,22 +50,32 @@ class Fridge {
 
 	toDetailedView() {
 		//maybe should move it into a Items Javascript object model
-		let itemsHTML = '<ul>';
-		this.items.forEach((item) => {
-			itemsHTML += `<li>ID: ${item.id} <br>
-												Name: ${item.name} <br>
-												Expiration date: ${item.expiration_date}
-										</li>`
-		})
+		let itemsHTML;
+		if (this.items.length === 0) {
+			itemsHTML = "<em>No Items yet.</em><br>"
+		} else {
+			itemsHTML = '<ul>';
+			this.items.forEach((item) => {
+				itemsHTML += `<li>ID: ${item.id} <br>
+													Name: ${item.name} <br>
+													Expiration date: ${item.expiration_date}
+											</li>`
+			})
 		itemsHTML += "</ul>"
+		}
 
+		
+		let commentsHTML;
+		if (this.comments.length === 0) {
+			commentsHTML = "<em>No Comments yet.</em><br>"
+		} else {
+			commentsHTML = '<ul>';
 
-		let commentsHTML = '<ul>';
-		this.comments.forEach((comment) => {
-			commentsHTML += `<li>${comment.comment} - ${comment.created_at}<br></li>`
-		})
-		commentsHTML += "</ul>"
-
+			this.comments.forEach((comment) => {
+				commentsHTML += `<li>${comment.comment} - ${comment.created_at}<br></li>`
+			})
+			commentsHTML += "</ul>"
+		}
 
 
 		return `<div>
@@ -80,13 +90,10 @@ class Fridge {
 
 			New Comment: <br/> <textarea/>
 			<br/>
-			<button onClick=""> Submit </button> 
-
-			<br /><br />
-
+			<button onClick=""> Submit </button>
 			<br />
-		</div>`;
-		//dont forget about comments later
+			<br />
+		</div>`
 	}
 
 	toHtmlLi() {
