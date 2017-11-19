@@ -57,15 +57,26 @@ class Fridge {
 												Expiration date: ${item.expiration_date}
 										</li>`
 		})
-
 		itemsHTML += "</ul>"
+
+
+		let commentsHTML = '<ul>';
+		this.comments.forEach((comment) => {
+			commentsHTML += `<li>${comment.comment} - ${comment.created_at}<br></li>`
+		})
+		commentsHTML += "</ul>"
+
+
 
 		return `<div>
 			Fridge ID: ${this.id} <br />
 			Name: ${this.name} <br />
 			Items: 
 			${itemsHTML}
-			Comments: **TO BE ADDED** <br />
+			<br />
+			Comments:
+			${commentsHTML}
+			<br />
 
 			New Comment: <br/> <textarea/>
 			<br/>
