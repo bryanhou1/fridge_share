@@ -30,6 +30,7 @@ function showFridgeListener() {
 		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
 		let fridge = fridges.find((fridge) => fridge.id === targetId);
 		displayFridge(fridge);
+		addNewFridgeCommentListener();
 	})
 }
 
@@ -38,7 +39,15 @@ function displayFridge(fridge){
 	$("div#display_fridge").html(fridgeHTML);
 }
 
-
+function addNewFridgeCommentListener(){
+	$("form#new_fridge_comment").on("submit", (e) => {
+		e.preventDefault();
+		let commentData = $(this).serialize()
+		$.post( "/fridge_comments", commentData, function( data ) {
+		//   $( ".result" ).html( data );
+			});
+		})
+}
 
 class Fridge {
 	constructor (fridge_attr) {
@@ -77,7 +86,6 @@ class Fridge {
 			commentsHTML += "</ul>"
 		}
 
-
 		return `<div>
 			Fridge ID: ${this.id} <br />
 			Name: ${this.name} <br />
@@ -88,9 +96,12 @@ class Fridge {
 			${commentsHTML}
 			<br />
 
-			New Comment: <br/> <textarea/>
-			<br/>
-			<button onClick=""> Submit </button>
+			<form id="new_fridge_comment">
+				<label for="fridge_comments[comment]">New Comment:</label>
+				<textarea id="fridge_comments[comment]" name="fridge_comments[comment]">test</textarea>
+				<br/>
+				<input type="submit" data_fridge_id="${this.id}" />
+			</form>
 			<br />
 			<br />
 		</div>`

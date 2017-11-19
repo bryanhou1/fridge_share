@@ -12,7 +12,29 @@ class FridgeCommentsController < ApplicationController
       end
     end
   end
+  # # PATCH/PUT /fridges/1
+  # # PATCH/PUT /fridges/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @fridge.update(fridge_params)
+  #       format.html { redirect_to @fridge, notice: 'Fridge was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @fridge }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @fridge.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
+  # # DELETE /fridges/1
+  # # DELETE /fridges/1.json
+  # def destroy
+  #   @fridge.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to fridges_url, notice: 'Fridge was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
   private
     # # Use callbacks to share common setup or constraints between actions.
     # def set_fridge_comments
