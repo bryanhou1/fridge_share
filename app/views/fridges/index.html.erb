@@ -7,13 +7,14 @@
   <div class="col-3" id="display_fridge"></div>
   <div class="col"  id="new_comment_result"></div>
 </div>
-
-
-
-<div >
+<div class="row">
+    <%= link_to 'New Fridge', new_fridge_path %> | 
+    <a href="#" id="new_fridge_btn">New fridge on page</a>
 </div>
-<div>
+<div class="row">
+  <div class="col-3" id="display_new_fridge_form"></div>
 </div>
+
 <!-- <table border=1 bordercolor=black>
   <thead>
     <tr>
@@ -38,6 +39,3 @@
   </tbody>
 </table> -->
 
-<br>
-
-<%= link_to 'New Fridge', new_fridge_path %>
