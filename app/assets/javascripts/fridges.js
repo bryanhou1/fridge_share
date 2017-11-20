@@ -5,6 +5,7 @@ $(() => {
 			showFridges();
 	});
 
+	addNewFridgeBtnListener();
 });
 
 function hideBtn(btn) {
@@ -38,6 +39,20 @@ function displayFridge(fridge){
 	$("div#display_fridge").html(fridgeHTML);
 }
 
+function addNewFridgeBtnListener() {
+	$("#new_fridge_btn").on("click", function(e) {
+		e.preventDefault();
+		displayNewFridgeForm();
+	})
+}
+
+function displayNewFridgeForm() {
+	
+}
+
+
+
+
 function addNewFridgeCommentListener(){
 	//not sure why arrow function messes up $(this)
 	$("form#new_fridge_comment").on("submit", function(e) {
@@ -62,6 +77,8 @@ function updateFridges() {
 	//can improve efficiency later
 	return getFridges();
 }
+
+
 
 class Fridge {
 	constructor (fridge_attr) {
