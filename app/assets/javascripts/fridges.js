@@ -24,6 +24,7 @@ function showFridges() {
 		$("ul#fridges_li").append(fridge.toHtmlLi())
 	})
 	showFridgeListener();
+	editFridgeListener();
 }
 
 function showFridgeListener() {
@@ -32,6 +33,14 @@ function showFridgeListener() {
 		let fridge = fridges.find((fridge) => fridge.id === targetId);
 		displayFridge(fridge);
 		addNewFridgeCommentListener();
+	})
+}
+
+function editFridgeListener() {
+	$(".edit_fridge_btn").on("click", (e)=> {
+		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
+		let fridge = fridges.find((fridge) => fridge.id === targetId);
+		debugger;
 	})
 }
 
@@ -57,8 +66,9 @@ function displayNewFridgeForm() {
 	  <input type="submit" value="submit">
 	</form>`;
 
-	$("#display_new_fridge_form").html(new_fridge_form);
+	$("#display_fridge_form").html(new_fridge_form);
 }
+
 
 function addNewFridgeSubmitListener() {
 	$("#new_fridge_form").on("submit", function(e) {
@@ -168,7 +178,8 @@ class Fridge {
 			Name: ${this.name} <br />
 			<a href="fridges/${this.id}">Show</a> | 
 			<a class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</a> | 
-			<a href="fridges/${this.id}/edit">Edit</a>
+			<a href="fridges/${this.id}/edit">Edit</a> | 
+			<a class="edit_fridge_btn" data-fridge-id="${this.id}">Edit on Page</a>
 			<br /><br />
 		</li>`
 	}
