@@ -42,13 +42,25 @@ function addNewFridgeCommentListener(){
 	//not sure why arrow function messes up $(this)
 	$("form#new_fridge_comment").on("submit", function(e) {
 	  e.preventDefault();
-	  console.log($(this).serialize());
+	  let currentFridgeId = parseInt($('input[name="fridge_comment[fridge_id]"]').val());
 		let commentData = $(this).serialize();
-		// debugger;
 		$.post("/fridge_comments", commentData).done(function( data ) {
-			console.log("success");
+			updateFridges().done(() => {
+
+				displayFridge(fridges.find((fridge) => fridge.id === currentFridgeId));
+				addNewFridgeCommentListener();
+			});
+			
+			// $("div#new_comment_result").html(`New Comment: <br>
+			// 	${data.comment} - ${data.created_at} <br>
+			// `)
 		})
 	});
+}
+
+function updateFridges() {
+	//can improve efficiency later
+	return getFridges();
 }
 
 class Fridge {
@@ -105,6 +117,7 @@ class Fridge {
 				<br/>
 				<input type="submit" data_fridge_id="${this.id}" />
 			</form>
+			<div id="new_comment_result"></div>
 			<br />
 			<br />
 		</div>`
