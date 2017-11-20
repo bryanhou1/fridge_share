@@ -100,7 +100,9 @@ class Fridge {
 			commentsHTML += "</ul>"
 		}
 
-		return `<div>
+		return `
+		<h2> Fridge details </h2>
+		<div>
 			Fridge ID: ${this.id} <br />
 			Name: ${this.name} <br />
 			Items: 
