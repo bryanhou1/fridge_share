@@ -40,7 +40,8 @@ function editFridgeListener() {
 	$(".edit_fridge_btn").on("click", (e)=> {
 		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
 		let fridge = fridges.find((fridge) => fridge.id === targetId);
-		debugger;
+		displayEditFridgeForm(fridge);
+		// addEditFridgeSubmitListener();
 	})
 }
 
@@ -55,6 +56,19 @@ function addNewFridgeBtnListener() {
 		displayNewFridgeForm();
 		addNewFridgeSubmitListener();
 	})
+}
+
+function displayEditFridgeForm(fridge) {
+	const edit_fridge_form = `
+	<h2>Edit Fridge ${fridge.id}</h2>
+	<form id="edit_fridge_form">
+	  <label for="fridge[name]">Name:</label>
+	  <input type="text" name="fridge[name]" id="fridge[name]" value="${fridge.name}">
+	  <br>
+	  <input type="submit" value="update">
+	</form>`;
+
+	$("#display_fridge_form").html(edit_fridge_form);
 }
 
 function displayNewFridgeForm() {
