@@ -3,7 +3,7 @@ class FridgeCommentsController < ApplicationController
   # POST /fridge_comments.json
   def create
     @fridge_comment = FridgeComment.new(fridge_comment_params)
-
+    
     respond_to do |format|
       if @fridge_comment.save
         format.json { render json: @fridge_comment, status: 201}

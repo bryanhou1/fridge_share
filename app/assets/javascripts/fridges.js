@@ -1,12 +1,11 @@
 let fridges;
 
 $(() => {
-	getFridges().done(()=> {
+	getFridges().done(() => {
 			showFridges();
 	});
 
 });
-
 
 function hideBtn(btn) {
 	btn.remove();
@@ -40,13 +39,16 @@ function displayFridge(fridge){
 }
 
 function addNewFridgeCommentListener(){
-	$("form#new_fridge_comment").on("submit", (e) => {
-		e.preventDefault();
-		let commentData = $(this).serialize()
-		$.post( "/fridge_comments", commentData, function( data ) {
-		//   $( ".result" ).html( data );
-			});
+	//not sure why arrow function messes up $(this)
+	$("form#new_fridge_comment").on("submit", function(e) {
+	  e.preventDefault();
+	  console.log($(this).serialize());
+		let commentData = $(this).serialize();
+		// debugger;
+		$.post("/fridge_comments", commentData).done(function( data ) {
+			console.log("success");
 		})
+	});
 }
 
 class Fridge {
@@ -97,8 +99,9 @@ class Fridge {
 			<br />
 
 			<form id="new_fridge_comment">
-				<label for="fridge_comments[comment]">New Comment:</label>
-				<textarea id="fridge_comments[comment]" name="fridge_comments[comment]">test</textarea>
+				<input type="hidden" value="${this.id}" name="fridge_comment[fridge_id]" />
+				<label for="fridge_comment[comment]">New Comment:</label>
+				<textarea id="fridge_comment[comment]" name="fridge_comment[comment]">test</textarea>
 				<br/>
 				<input type="submit" data_fridge_id="${this.id}" />
 			</form>
