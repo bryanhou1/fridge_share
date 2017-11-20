@@ -19,6 +19,7 @@ function getFridges() {
 }
 
 function showFridges() {
+	$("ul#fridges_li").empty();
 	fridges.forEach((fridge) => {
 		$("ul#fridges_li").append(fridge.toHtmlLi())
 	})
