@@ -51,9 +51,9 @@ function addNewFridgeCommentListener(){
 				addNewFridgeCommentListener();
 			});
 			
-			// $("div#new_comment_result").html(`New Comment: <br>
-			// 	${data.comment} - ${data.created_at} <br>
-			// `)
+			$("div#new_comment_result").html(`New Comment Added: <br>
+				${data.comment} - ${data.created_at} <br>
+			`)
 		})
 	});
 }
@@ -117,7 +117,6 @@ class Fridge {
 				<br/>
 				<input type="submit" data_fridge_id="${this.id}" />
 			</form>
-			<div id="new_comment_result"></div>
 			<br />
 			<br />
 		</div>`
