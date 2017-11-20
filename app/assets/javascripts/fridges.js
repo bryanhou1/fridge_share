@@ -43,13 +43,33 @@ function addNewFridgeBtnListener() {
 	$("#new_fridge_btn").on("click", function(e) {
 		e.preventDefault();
 		displayNewFridgeForm();
+		addNewFridgeSubmitListener();
 	})
 }
 
 function displayNewFridgeForm() {
-	
+	const new_fridge_form = `
+	<h2>New Fridge</h2>
+	<form id="new_fridge_form">
+	  <label for="fridge[name]">Name:</label>
+	  <input type="text" name="fridge[name]" id="fridge[name]"><br>
+	  <input type="submit" value="submit">
+	</form>`;
+
+	$("#display_new_fridge_form").html(new_fridge_form);
 }
 
+function addNewFridgeSubmitListener() {
+	$("#new_fridge_form").on("submit", function(e) {
+		e.preventDefault();
+		const fridgeData = $(this).serialize();
+		$.post("/fridges", fridgeData).done(function(data) {
+			updateFridges().done(() => {
+				showFridges();
+			});
+		})
+	})
+}
 
 
 
