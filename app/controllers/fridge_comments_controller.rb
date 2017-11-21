@@ -2,7 +2,7 @@ class FridgeCommentsController < ApplicationController
   # POST /fridge_comments
   # POST /fridge_comments.json
   def create
-    @fridge_comment = FridgeComment.new(fridge_comment_params)
+    @fridge_comment = FridgeComment.new(fridge_comment_params.merge(user: current_user))
     
     respond_to do |format|
       if @fridge_comment.save
