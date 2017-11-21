@@ -51,7 +51,7 @@ class FridgesController < ApplicationController
     respond_to do |format|
       if @fridge.update(fridge_params)
         format.html { redirect_to @fridge, notice: 'Fridge was successfully updated.' }
-        format.json { render :show, status: :ok, location: @fridge }
+        format.json { render json: @fridge, status: 201 }
       else
         format.html { render :edit }
         format.json { render json: @fridge.errors, status: :unprocessable_entity }

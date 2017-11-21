@@ -99,19 +99,22 @@ function addNewFridgeSubmitListener() {
 function addEditFridgeSubmitListener(){
 	$("#edit_fridge_form").on("submit", function(e) {
 		e.preventDefault();
-		debugger
+		const fridgeId = this.dataset.fridgeId;
 		const fridgeData = $(this).serialize();
 		$.ajax({
 			type: "PATCH",
-			url: `fridges/${this.dataset.fridgeId}`,
-			data: JSON.stringify(fridgeData),
-			contentType: "application/json",
+			url: `fridges/${fridgeId}`,
+			data: fridgeData,
+			contentType: "application/x-www-form-urlencoded",
 			dataType: "json",
 		}).done(function(data){
-			alert("done");
 			updateFridges().done(() => {
 				showFridges();
 			});
+
+			//put in functions later
+			$("#display_fridge").html("");
+			$("#new_comment_result").html("");
 		})
 	})
 }
