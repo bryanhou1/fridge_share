@@ -178,7 +178,13 @@ class Fridge {
 			commentsHTML = '<ul>';
 
 			this.comments.forEach((comment) => {
-				commentsHTML += `<li>${comment.comment} - ${comment.created_at}<br></li>`
+				const userName = (comment.user) ? comment.user.name : "<em>guest user</em>";
+
+
+				commentsHTML += `<li>
+					${comment.comment} - ${comment.created_at}<br>
+					By: ${userName}
+				</li>`
 			})
 			commentsHTML += "</ul>"
 		}
