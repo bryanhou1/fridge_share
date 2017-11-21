@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :user_fridges
   has_many :items
+  has_many :fridge_comments
   has_many :fridges, through: :items
 
   def self.from_omniauth(auth)
