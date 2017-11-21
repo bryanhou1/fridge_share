@@ -41,7 +41,7 @@ function editFridgeListener() {
 		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
 		let fridge = fridges.find((fridge) => fridge.id === targetId);
 		displayEditFridgeForm(fridge);
-		// addEditFridgeSubmitListener();
+		addEditFridgeSubmitListener();
 	})
 }
 
@@ -61,7 +61,7 @@ function addNewFridgeBtnListener() {
 function displayEditFridgeForm(fridge) {
 	const edit_fridge_form = `
 	<h2>Edit Fridge ${fridge.id}</h2>
-	<form id="edit_fridge_form">
+	<form id="edit_fridge_form" data-fridge-id="${fridge.id}">
 	  <label for="fridge[name]">Name:</label>
 	  <input type="text" name="fridge[name]" id="fridge[name]" value="${fridge.name}">
 	  <br>
@@ -96,7 +96,25 @@ function addNewFridgeSubmitListener() {
 	})
 }
 
-
+function addEditFridgeSubmitListener(){
+	$("#edit_fridge_form").on("submit", function(e) {
+		e.preventDefault();
+		debugger
+		const fridgeData = $(this).serialize();
+		$.ajax({
+			type: "PATCH",
+			url: `fridges/${this.dataset.fridgeId}`,
+			data: JSON.stringify(fridgeData),
+			contentType: "application/json",
+			dataType: "json",
+		}).done(function(data){
+			alert("done");
+			updateFridges().done(() => {
+				showFridges();
+			});
+		})
+	})
+}
 
 function addNewFridgeCommentListener(){
 	//not sure why arrow function messes up $(this)
@@ -179,7 +197,7 @@ class Fridge {
 				<label for="fridge_comment[comment]">New Comment:</label>
 				<textarea id="fridge_comment[comment]" name="fridge_comment[comment]">test</textarea>
 				<br/>
-				<input type="submit" data_fridge_id="${this.id}" />
+				<input type="submit" data-fridge-id="${this.id}" />
 			</form>
 			<br />
 			<br />
