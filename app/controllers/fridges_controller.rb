@@ -1,6 +1,6 @@
 class FridgesController < ApplicationController
   before_action :set_fridge, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show]
   # GET /fridges
   # GET /fridges.json
   def index
