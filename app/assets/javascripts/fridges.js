@@ -151,7 +151,7 @@ class Fridge {
 		this.id = fridge_attr.id
 		this.name = fridge_attr.name
 		this.items = fridge_attr.items
-		this.comments = fridge_attr.fridge_comments;
+		this.comments = fridge_attr.fridge_comments.map((comment_attr) => { return new Comment(comment_attr)})
 	}
 
 	toDetailedView() {
