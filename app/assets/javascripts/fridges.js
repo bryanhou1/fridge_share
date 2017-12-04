@@ -152,11 +152,11 @@ function updateFridges() {
 
 
 class Fridge {
-	constructor (fridge_attr) {
-		this.id = fridge_attr.id
-		this.name = fridge_attr.name
-		this.items = fridge_attr.items
-		this.comments = fridge_attr.fridge_comments.map((comment_attr) => { return new Comment(comment_attr)})
+	constructor (attr) {
+		this.id = attr.id;
+		this.name = attr.name;
+		this.items = attr.items.map(item_attr => new Item(item_attr));
+		this.comments = attr.fridge_comments.map(comment_attr => new Comment(comment_attr));
 	}
 
 	toDetailedView() {
