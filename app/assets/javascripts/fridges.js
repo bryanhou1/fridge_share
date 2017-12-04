@@ -1,10 +1,5 @@
-let fridges;
-
 $(() => {
-	getFridges().done(() => {
-			showFridges();
-	});
-
+	getFridges().done(() => showFridges());
 	addNewFridgeBtnListener();
 });
 
@@ -13,16 +8,27 @@ function hideBtn(btn) {
 }
 
 function getFridges() {
-	return $.get("/fridges.json", function(data) {
-		fridges = data.map((fridge_attr) => { return new Fridge(fridge_attr)})
+	return $.get("/fridges.json", fridges => {
+		store.state.fridges = fridges.map(attributes => new Fridge(attributes))
 	})
 }
 
+// function get(url, cb) {
+
+// 	...do something with url and when it has the info it needs after a perido of time it will pass it to the callback function argument. 
+
+// 	setTimeout(() => {
+// 		cb('something')
+// 	}, 3000)
+// }
+
 function showFridges() {
-	$("ul#fridges_li").empty();
-	fridges.forEach((fridge) => {
-		$("ul#fridges_li").append(fridge.toHtmlLi())
-	})
+	const element = $("ul#fridges_li");
+	const fridgeElements = store.getState().fridges.reduce((pre, next) =>  pre += next.toHtmlLi(), "");
+
+	element.empty();
+	element.append(fridgeElements)
+
 	showFridgeListener();
 	editFridgeListener();
 }
@@ -224,4 +230,5 @@ class Fridge {
 			<br /><br />
 		</li>`
 	}
+
 }
