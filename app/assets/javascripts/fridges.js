@@ -1,6 +1,9 @@
 $(() => {
-	getFridges().done(() => showFridges());
-	addNewFridgeBtnListener();
+	if (window.location.pathname.match(/^\/fridges/)){
+		getFridges().done(() => showFridges());
+		addNewFridgeBtnListener();
+	}
+	
 });
 
 function hideBtn(btn) {
@@ -24,7 +27,7 @@ function getFridges() {
 
 function showFridges() {
 	const element = $("ul#fridges_li");
-	const fridgeElements = store.getState().fridges.reduce((pre, next) =>  pre += next.toHtmlLi(), "");
+	const fridgeElements = store.getState().fridges.reduce((pre, next) =>  pre + next.toHtmlLi(), "");
 
 	element.empty();
 	element.append(fridgeElements)
@@ -34,18 +37,18 @@ function showFridges() {
 }
 
 function showFridgeListener() {
-	$(".show_fridge_btn").on("click", (e)=> {
-		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
-		let fridge = fridges.find((fridge) => fridge.id === targetId);
+	$(".show_fridge_btn").on("click", e => {
+		const targetId = parseInt(e.currentTarget.dataset.fridgeId, 10);
+		const fridge = fridges.find(fridge => fridge.id === targetId);
 		displayFridge(fridge);
 		addNewFridgeCommentListener();
 	})
 }
 
 function editFridgeListener() {
-	$(".edit_fridge_btn").on("click", (e)=> {
-		let targetId = parseInt(e.currentTarget.dataset.fridgeId);
-		let fridge = fridges.find((fridge) => fridge.id === targetId);
+	$(".edit_fridge_btn").on("click", e => {
+		const targetId = parseInt(e.currentTarget.dataset.fridgeId, 10);
+		const fridge = fridges.find(fridge => fridge.id === targetId);
 		displayEditFridgeForm(fridge);
 		addEditFridgeSubmitListener();
 	})
@@ -57,7 +60,7 @@ function displayFridge(fridge){
 }
 
 function addNewFridgeBtnListener() {
-	$("#new_fridge_btn").on("click", function(e) {
+	$("#new_fridge_btn").on("click", (e) => {
 		e.preventDefault();
 		displayNewFridgeForm();
 		addNewFridgeSubmitListener();
@@ -95,9 +98,7 @@ function addNewFridgeSubmitListener() {
 		e.preventDefault();
 		const fridgeData = $(this).serialize();
 		$.post("/fridges", fridgeData).done(function(data) {
-			updateFridges().done(() => {
-				showFridges();
-			});
+			updateFridges().done(() => showFridges());
 		})
 	})
 }
@@ -114,9 +115,7 @@ function addEditFridgeSubmitListener(){
 			contentType: "application/x-www-form-urlencoded",
 			dataType: "json",
 		}).done(function(data){
-			updateFridges().done(() => {
-				showFridges();
-			});
+			updateFridges().done(() => showFridges() );
 
 			//put in functions later
 			$("#display_fridge").html("");
@@ -183,7 +182,7 @@ class Fridge {
 		} else {
 			commentsHTML = '<ul>';
 
-			this.comments.forEach((comment) => {
+			this.comments.forEach(comment => {
 				const userName = (comment.user) ? comment.user.name : "<em>guest user</em>";
 
 
@@ -232,3 +231,4 @@ class Fridge {
 	}
 
 }
+
