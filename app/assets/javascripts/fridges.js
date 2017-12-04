@@ -39,7 +39,7 @@ function showFridges() {
 function showFridgeListener() {
 	$(".show_fridge_btn").on("click", e => {
 		const targetId = parseInt(e.currentTarget.dataset.fridgeId, 10);
-		const fridge = fridges.find(fridge => fridge.id === targetId);
+		const fridge = store.getState().fridges.find(fridge => fridge.id === targetId);
 		displayFridge(fridge);
 		addNewFridgeCommentListener();
 	})
@@ -48,7 +48,7 @@ function showFridgeListener() {
 function editFridgeListener() {
 	$(".edit_fridge_btn").on("click", e => {
 		const targetId = parseInt(e.currentTarget.dataset.fridgeId, 10);
-		const fridge = fridges.find(fridge => fridge.id === targetId);
+		const fridge = store.getState().fridges.find(fridge => fridge.id === targetId);
 		displayEditFridgeForm(fridge);
 		addEditFridgeSubmitListener();
 	})
@@ -60,7 +60,7 @@ function displayFridge(fridge){
 }
 
 function addNewFridgeBtnListener() {
-	$("#new_fridge_btn").on("click", (e) => {
+	$("#new_fridge_btn").on("click", e => {
 		e.preventDefault();
 		displayNewFridgeForm();
 		addNewFridgeSubmitListener();
@@ -133,7 +133,7 @@ function addNewFridgeCommentListener(){
 		$.post("/fridge_comments", commentData).done(function( data ) {
 			updateFridges().done(() => {
 
-				displayFridge(fridges.find((fridge) => fridge.id === currentFridgeId));
+				displayFridge(store.fridges.find((fridge) => fridge.id === currentFridgeId));
 				addNewFridgeCommentListener();
 			});
 			
