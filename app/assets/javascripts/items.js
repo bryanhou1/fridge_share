@@ -1,8 +1,7 @@
 $(() => {
 	if (window.location.pathname.match(/^\/items/)){
-			getFridges();
-			getItems().done(() => showItems());
-		// addNewItemBtnListener();
+			$.when(getFridges(),getItems())
+				.done(() => showItems());
 	}
 });
 
