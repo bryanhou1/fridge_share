@@ -42,8 +42,30 @@ function editItemListener() {
 		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
 		const item = store.getState().items.find(item => item.id === targetId);
 		displayEditItemForm(item);
-		//add listener
+		addEditItemSubmitListener();
 	})
+}
+
+function addEditItemSubmitListener() {
+	$("#edit_item_form").on("click", e => {
+		e.preventDefault();
+
+		const itemId = e.currentTarget.dataset.itemId
+		const itemData = $(this).serialize();
+		$.ajax({
+			type: "PATCH",
+			url: `items/${itemId}`,
+			data: itemData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json",
+		})
+			.done(() => updateItems().done(showItems))
+	})
+}
+
+function updateItems() {
+	//optimization needed;
+	return $.when(updateFridges(),getItems());
 }
 
 function destroyItemListener() {
@@ -111,7 +133,7 @@ class Item {
 			  <label for="item[name]">Name:</label>
 			  <input type="text" name="item[name]" id="item[name]" value=${this.name}>
 			  <br>
-				<label for="item[expiration_date]">Expiration date</label>
+				<label for="item[expiration_date]">Expiration date:</label>
     		<input id="item[expiration_date]" type="text" value=${this.expiration_date} name="item[expiration_date]">
 				<br>
 		    <label for="item[user_id]">Belongs to: </label>
