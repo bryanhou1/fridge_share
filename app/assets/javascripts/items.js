@@ -129,11 +129,18 @@ class Item {
 	}
 
 	userSelectButton() {
-		// const html = '<select name="item[user_id]" id="item_user_id"><option value="">Add new</option>' + 
-		// store.getState().users.forEach(user => {
-		// 	return `<option value=${user.id}>${user.id} - ${user.name}></option>`
-		// }) +
-		// '</select>'
+		const userId = this.user.id;
+		debugger;
+		const html = '<select name="item[user_id]" id="item_user_id">' + 
+		store.getState().users.map(user => {
+			if (user.id == userId){
+				return `<option selected value=${user.id}>${user.id} - ${user.name}</option>`
+			} else {
+				return `<option value=${user.id}>${user.id} - ${user.name}</option>`
+			}
+		
+		}) +
+		'</select>'
 
 		// 	<option value="1">1 - for</option>
 		// 	<option selected="selected" value="2">2 - apt 3013</option>
@@ -141,7 +148,7 @@ class Item {
 		// 	<option value="4">4 - 123456</option>
 		// 	<option value="5">5 - 12345</option>
 		// </select>
-    // return html;
+    return html;
 	}
 
 	fridgeSelectButton() {
