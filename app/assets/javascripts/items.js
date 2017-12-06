@@ -1,6 +1,6 @@
 $(() => {
 	if (window.location.pathname.match(/^\/items/)){
-			$.when(getFridges(),getItems())
+			$.when(getFridges(),getItems(),getUsers())
 				.done(() => showItems());
 	}
 });
