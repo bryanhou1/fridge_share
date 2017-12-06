@@ -1,6 +1,7 @@
 $(() => {
 	if (window.location.pathname.match(/^\/items/)){
-		getItems().done(() => showItems());
+			getFridges();
+			getItems().done(() => showItems());
 		// addNewItemBtnListener();
 	}
 });
@@ -129,29 +130,28 @@ class Item {
 	}
 
 	userSelectButton() {
-		//STUB
-		// <select name="item[fridge_id]" id="item_fridge_id"><option value="">Add new</option>
+		// const html = '<select name="item[user_id]" id="item_user_id"><option value="">Add new</option>' + 
+		// store.getState().users.forEach(user => {
+		// 	return `<option value=${user.id}>${user.id} - ${user.name}></option>`
+		// }) +
+		// '</select>'
+
 		// 	<option value="1">1 - for</option>
 		// 	<option selected="selected" value="2">2 - apt 3013</option>
 		// 	<option value="3">3 - 1234</option>
 		// 	<option value="4">4 - 123456</option>
 		// 	<option value="5">5 - 12345</option>
 		// </select>
-    return ``
+    // return html;
 	}
 
 	fridgeSelectButton() {
-		//STUB
-		// <select name="item[fridge_id]" id="item[fridge_id]">
-
-		// 	<option value="">Add new</option>
-		// 	<option value="1">1 - for</option>
-		// 	<option selected="selected" value="2">2 - apt 3013</option>
-		// 	<option value="3">3 - 1234</option>
-		// 	<option value="4">4 - 123456</option>
-		// 	<option value="5">5 - 12345</option>
-		// </select>
-		return ``
+		const html = '<select name="item[fridge_id]" id="item[fridge_id]"><option value="">Add new</option>'+
+		''+ store.getState().fridges.map(fridge => {
+			return `<option value=${fridge.id}>${fridge.id} - ${fridge.name}</option>`
+		})+
+		'</select>'
+		return html;
 	}
 }
 
