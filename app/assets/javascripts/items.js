@@ -41,7 +41,8 @@ function editItemListener() {
 		e.preventDefault();
 		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
 		const item = store.getState().items.find(item => item.id === targetId);
-		// displayEditItemForm(item);
+		displayEditItemForm(item);
+		//add listener
 	})
 }
 
@@ -54,11 +55,12 @@ function destroyItemListener() {
 	})
 }
 
-
 function showItem(item) {
-
-
 	$("div#item_details_container").html(item.toDetailedView())
+}
+
+function displayEditItemForm(item) {
+	$("div#item_details_container").html(item.editItemForm());
 }
 
 class Item {
@@ -81,7 +83,6 @@ class Item {
 		`
 	}
 
-
 	toHtmlLi(){
 		// write logic to display "show edit or destroy"
 		const expired = true; //write later
@@ -102,4 +103,55 @@ class Item {
 			<a class="destroy_item_btn" data-item-id="${this.id}">Destroy</a>
 		`
 	}
+
+	editItemForm() {
+		return `
+			<h2>Edit item ${this.id}</h2>
+			<form id="edit_item_form" data-item-id=${this.id}>
+			  <label for="item[name]">Name:</label>
+			  <input type="text" name="item[name]" id="item[name]" value=${this.name}>
+			  <br>
+				<label for="item[expiration_date]">Expiration date</label>
+    		<input id="item[expiration_date]" type="text" value=${this.expiration_date} name="item[expiration_date]">
+				<br>
+		    <label for="item[user_id]">Belongs to: </label>
+				${this.userSelectButton()}
+
+				<label for="item[fridge_id]">Fridge: </label>
+				${this.fridgeSelectButton()}
+			 	
+				<label for="item_fridge_attributes_Create new fridge to place item:">Create new fridge to place item:</label><br>
+				<input type="text" name="item[fridge_attributes][name]" id="item_fridge_attributes_name"><br>
+
+			  <input type="submit" value="update">
+			</form>
+		`
+	}
+
+	userSelectButton() {
+		//STUB
+		// <select name="item[fridge_id]" id="item_fridge_id"><option value="">Add new</option>
+		// 	<option value="1">1 - for</option>
+		// 	<option selected="selected" value="2">2 - apt 3013</option>
+		// 	<option value="3">3 - 1234</option>
+		// 	<option value="4">4 - 123456</option>
+		// 	<option value="5">5 - 12345</option>
+		// </select>
+    return ``
+	}
+
+	fridgeSelectButton() {
+		//STUB
+		// <select name="item[fridge_id]" id="item[fridge_id]">
+
+		// 	<option value="">Add new</option>
+		// 	<option value="1">1 - for</option>
+		// 	<option selected="selected" value="2">2 - apt 3013</option>
+		// 	<option value="3">3 - 1234</option>
+		// 	<option value="4">4 - 123456</option>
+		// 	<option value="5">5 - 12345</option>
+		// </select>
+		return ``
+	}
 }
+
