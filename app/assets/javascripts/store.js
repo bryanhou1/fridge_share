@@ -2,6 +2,7 @@ const store = {
 	state: {
 		fridges: [],
 		items: [],
+		users: [],
 	},
 	getState: function() {
 		return this.state
