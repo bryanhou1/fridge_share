@@ -94,7 +94,7 @@ function displayNewFridgeForm() {
 
 
 function addNewFridgeSubmitListener() {
-	$("#new_fridge_form").on("submit", function(e) {
+	$("#new_fridge_form").on("submit", e => {
 		e.preventDefault();
 		const fridgeData = $(this).serialize();
 		$.post("/fridges", fridgeData).done(function(data) {
