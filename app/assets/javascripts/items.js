@@ -32,7 +32,7 @@ function showItemListener() {
 		e.preventDefault();
 		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
 		const item = store.getState().items.find(item => item.id === targetId);
-		// displayItem(item);
+		showItem(item);
 	})
 }
 
@@ -54,14 +54,33 @@ function destroyItemListener() {
 	})
 }
 
+
+function showItem(item) {
+
+
+	$("div#item_details_container").html(item.toDetailedView())
+}
+
 class Item {
 	constructor (attr) {
 		this.id = attr.id;
 		this.name = attr.name;
 		this.expiration_date = attr.expiration_date;
 		this.user = attr.user;
+		this.fridge = attr.fridge;
 		// this.expired 
 	}
+
+	toDetailedView() {
+		return `
+			<h1> Item details </h1>
+			<h4> ${this.name} </h4> 
+			Expiration Date: ${this.expiration_date} <br>
+			Belongs to: <a href="/users/${this.user.id}">${this.user.name}</a> <br>
+			Fridge: ${this.fridge.id}. <a href="/fridges/${this.fridge.id}">${this.fridge.name}</a>
+		`
+	}
+
 
 	toHtmlLi(){
 		// write logic to display "show edit or destroy"
@@ -72,9 +91,15 @@ class Item {
 
 				Expiration Date: ${this.expiration_date} <br>
 				Belongs to: <a href="/users/${this.user.id}">${this.user.name}</a> <br>
-				<a class="show_item_btn" data-item-id="${this.id}">Show</a> | 
-				<a class="edit_item_btn" data-item-id="${this.id}">Edit</a> | 
-				<a class="destroy_item_btn" data-item-id="${this.id}">Destroy</a>
+				${this.optionBtns()}
 			</li>`;
+	}
+
+	optionBtns() {
+		return `
+			<a class="show_item_btn" data-item-id="${this.id}">Show</a> | 
+			<a class="edit_item_btn" data-item-id="${this.id}">Edit</a> | 
+			<a class="destroy_item_btn" data-item-id="${this.id}">Destroy</a>
+		`
 	}
 }
