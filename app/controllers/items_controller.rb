@@ -57,11 +57,10 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+        format.json { render json: @fridge, status: 201  }
       else
         format.html { render :edit }
         format.json { render json: @item.errors, status: :unprocessable_entity }

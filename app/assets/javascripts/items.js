@@ -47,11 +47,10 @@ function editItemListener() {
 }
 
 function addEditItemSubmitListener() {
-	$("#edit_item_form").on("click", e => {
+	$("#edit_item_form").on("submit", e => {
 		e.preventDefault();
-
-		const itemId = e.currentTarget.dataset.itemId
-		const itemData = $(this).serialize();
+		const itemId = e.currentTarget.dataset.itemId;
+		const itemData = $("#edit_item_form").serialize();
 		$.ajax({
 			type: "PATCH",
 			url: `items/${itemId}`,
