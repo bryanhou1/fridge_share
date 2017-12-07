@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+        format.json { render json: @fridge, status: 201  }
       else
         format.html { render :new }
         format.json { render json: @item.errors, status: :unprocessable_entity }

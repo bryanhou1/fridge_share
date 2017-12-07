@@ -29,10 +29,28 @@ function showItems() {
 function addNewItemBtnListener() {
 	$("a#new_item_btn").on("click", e => {
 		e.preventDefault();
-		$("div#item_details_container").html(Item.newItemForm())
+		$("div#item_details_container").html(Item.newItemForm());
+		addNewItemSubmitListener();
 	})
 }
 
+function addNewItemSubmitListener() {
+	$("form#new_item_form").on("submit", function(e) {
+		e.preventDefault();
+		const itemData = $(this).serialize();
+		$.post("/items", itemData, ()=> {}, "json")
+			.done(function(data) {
+				$("#messages_container").html("New Item Created!");
+				updateItems().done(() => {
+					showItems();
+					$("div#item_details_container").empty();
+				});
+			})
+			.fail(() => {
+				//fill in
+			})
+	})
+}
 function showItemListener() {
 	$(".show_item_btn").on("click", e => {
 		e.preventDefault();
