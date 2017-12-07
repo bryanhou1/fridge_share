@@ -80,8 +80,21 @@ function updateItems() {
 function destroyItemListener() {
 	$(".destroy_item_btn").on("click", e => {
 		e.preventDefault();
-		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
-		const item = store.getState().items.find(item => item.id === targetId);
+		const itemId = parseInt(e.currentTarget.dataset.itemId, 10);
+		if (confirm("Are you sure?")){
+			$.ajax({
+			type: "DELETE",
+			url: `items/${itemId}`,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json",
+		})
+			.done(() => {
+				$("div#messages_container").html(`Item ${itemId} deleted.`)
+				$("div#item_details_container").empty();
+				updateItems().done(showItems)
+			})
+		}
+		
 	})
 }
 
