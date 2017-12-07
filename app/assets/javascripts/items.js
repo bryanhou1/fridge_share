@@ -16,7 +16,7 @@ function showItems() {
 	const itemElements = store.getState().items.reduce((pre, next) =>  pre + next.toHtmlLi(), "");
 
 	element.empty();
-	element.append(itemElements)
+	element.append(itemElements);
 
 	showItemListener();
 	editItemListener();
@@ -30,6 +30,7 @@ function showItems() {
 function showItemListener() {
 	$(".show_item_btn").on("click", e => {
 		e.preventDefault();
+		$("#messages_container").empty();
 		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
 		const item = store.getState().items.find(item => item.id === targetId);
 		showItem(item);
@@ -39,6 +40,7 @@ function showItemListener() {
 function editItemListener() {
 	$(".edit_item_btn").on("click", e => {
 		e.preventDefault();
+		$("#messages_container").empty();
 		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
 		const item = store.getState().items.find(item => item.id === targetId);
 		displayEditItemForm(item);
@@ -58,7 +60,15 @@ function addEditItemSubmitListener() {
 			contentType: "application/x-www-form-urlencoded",
 			dataType: "json",
 		})
-			.done(() => updateItems().done(showItems))
+			.done(() => {
+				$("div#messages_container").html(`updated Item ${itemId} successfully.`)
+				$("div#item_details_container").empty();
+				updateItems().done(showItems)
+			})
+			.fail(() => {
+				//detail fail messages
+				$("div#messages_container").html(`updated Item ${itemId} failed.`)
+			})
 	})
 }
 
@@ -72,7 +82,6 @@ function destroyItemListener() {
 		e.preventDefault();
 		const targetId = parseInt(e.currentTarget.dataset.itemId, 10);
 		const item = store.getState().items.find(item => item.id === targetId);
-		//
 	})
 }
 
@@ -151,7 +160,7 @@ class Item {
 
 	userSelectButton() {
 		const userId = this.user.id;
-		const html = '<select name="item[user_id]" id="item_user_id">' + 
+		const html = '<select name="item[user_id]" id="item[user_id]">' + 
 		store.getState().users.map(user => `
 			<option ${user.id == userId ? "selected":""} value=${user.id}>
 				${user.id} - ${user.name}
