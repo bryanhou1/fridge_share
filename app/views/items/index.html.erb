@@ -13,8 +13,8 @@
 <% render partial: 'show', locals: {items: @items}%>
 <br>
 
-<% if @user %>
-	<%=link_to 'New Item for the user', new_user_item_path%>
+<% if user_signed_in? %>
+	<%=link_to 'New Item for the user', new_user_item_path(current_user)%>
 <% else %>
 	<%= link_to 'New Item', new_item_path %>
 <% end %>
