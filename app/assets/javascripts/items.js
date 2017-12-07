@@ -1,7 +1,10 @@
 $(() => {
 	if (window.location.pathname.match(/^\/items/)){
 			$.when(getFridges(),getItems(),getUsers())
-				.done(() => showItems());
+				.done(() => {
+					showItems();
+					addNewItemBtnListener();
+				});
 	}
 });
 
@@ -23,9 +26,12 @@ function showItems() {
 	destroyItemListener();
 }
 
-// function addNewItemBtnListener() {
-
-// }
+function addNewItemBtnListener() {
+	$("a#new_item_btn").on("click", e => {
+		e.preventDefault();
+		$("div#item_details_container").html(Item.newItemForm())
+	})
+}
 
 function showItemListener() {
 	$(".show_item_btn").on("click", e => {
@@ -116,6 +122,28 @@ class Item {
 		// this.expired 
 	}
 
+	static newItemForm() {
+		return `
+		<h2>New Item</h2>
+		<form id="new_item_form">
+		  <label for="item[name]">Name:</label>
+		  <input type="text" name="item[name]" id="item[name]">
+		  <br>
+			<label for="item[expiration_date]">Expiration date:</label>
+  		<input id="item[expiration_date]" type="text" name="item[expiration_date]">
+			<br>
+	    <label for="item[user_id]">Belongs to: </label>
+			${this.userSelectButton()}
+
+			<label for="item[fridge_id]">Fridge: </label>
+			${this.fridgeSelectButton()}
+		 	
+			<label for="item_fridge_attributes_Create new fridge to place item:">Create new fridge to place item:</label><br>
+			<input type="text" name="item[fridge_attributes][name]" id="item_fridge_attributes_name"><br>
+		  <input type="submit" value="Create New">
+		</form>`
+	}
+
 	toDetailedView() {
 		return `
 			<h1> Item details </h1>
@@ -158,10 +186,10 @@ class Item {
     		<input id="item[expiration_date]" type="text" value=${this.expiration_date} name="item[expiration_date]">
 				<br>
 		    <label for="item[user_id]">Belongs to: </label>
-				${this.userSelectButton()}
+				${Item.userSelectButton(this.user.id)}
 
 				<label for="item[fridge_id]">Fridge: </label>
-				${this.fridgeSelectButton()}
+				${Item.fridgeSelectButton(this.fridge.id)}
 			 	
 				<label for="item_fridge_attributes_Create new fridge to place item:">Create new fridge to place item:</label><br>
 				<input type="text" name="item[fridge_attributes][name]" id="item_fridge_attributes_name"><br>
@@ -171,8 +199,8 @@ class Item {
 		`
 	}
 
-	userSelectButton() {
-		const userId = this.user.id;
+	static userSelectButton(userId = -1) {
+		// const userId = this.user.id;
 		const html = '<select name="item[user_id]" id="item[user_id]">' + 
 		store.getState().users.map(user => `
 			<option ${user.id == userId ? "selected":""} value=${user.id}>
@@ -183,8 +211,8 @@ class Item {
     return html;
 	}
 
-	fridgeSelectButton() {
-		const fridgeId = this.fridge.id;
+	static fridgeSelectButton(fridgeId = -1) {
+		// const fridgeId = this.fridge.id;
 		const html = '<select name="item[fridge_id]" id="item[fridge_id]"><option value="">Add new</option>'+
 		''+ store.getState().fridges.map(fridge => {
 			return `<option ${fridge.id == fridgeId ? "selected":""} value=${fridge.id}>${fridge.id} - ${fridge.name}</option>`
