@@ -1,6 +1,6 @@
 $(() => {
 	if (window.location.pathname.match(/^\/fridges/)){
-		getFridges().done(() => showFridges());
+		getFridges().done(showFridges);
 		addNewFridgeBtnListener();
 	}
 	
@@ -97,9 +97,18 @@ function addNewFridgeSubmitListener() {
 	$("#new_fridge_form").on("submit", function(e) {
 		e.preventDefault();
 		const fridgeData = $(this).serialize();
-		$.post("/fridges", fridgeData).done(function(data) {
-			updateFridges().done(() => showFridges());
-		})
+		$.post("/fridges", fridgeData, () => {}, "json")
+			.done(() => {updateFridges().done(showFridges)})
+			.fail(data => {
+				let message = `New fridge creation failed.<br><br> Errors: <br><ul>`
+
+				$.each(data.responseJSON, (key, item) => {
+           message += `<li>${key} - ${item}</li>`;
+        });
+        message += "</ul>"
+				
+				$("div#messages_container").html(message)
+			})
 	})
 }
 
@@ -114,30 +123,28 @@ function addEditFridgeSubmitListener(){
 			data: fridgeData,
 			contentType: "application/x-www-form-urlencoded",
 			dataType: "json",
-		}).done(function(data){
-			updateFridges().done(() => showFridges() );
+		}).done(() => {
+			updateFridges().done(showFridges);
 
 			//put in functions later
 			$("#display_fridge").html("");
-			$("#new_comment_result").html("");
+			$("div#messages_container").html("");
 		})
 	})
 }
 
 function addNewFridgeCommentListener(){
-	//not sure why arrow function messes up $(this)
 	$("form#new_fridge_comment").on("submit", function(e) {
 	  e.preventDefault();
 	  let currentFridgeId = parseInt($('input[name="fridge_comment[fridge_id]"]').val());
 		let commentData = $(this).serialize();
-		$.post("/fridge_comments", commentData).done(function( data ) {
+		$.post("/fridge_comments", commentData).done(data => {
 			updateFridges().done(() => {
-
-				displayFridge(store.fridges.find((fridge) => fridge.id === currentFridgeId));
+				displayFridge(store.fridges.find(fridge => fridge.id === currentFridgeId));
 				addNewFridgeCommentListener();
 			});
 			
-			$("div#new_comment_result").html(`New Comment Added: <br>
+			$("div#messages_container").html(`New Comment Added: <br>
 				${data.comment} - ${data.created_at} <br>
 			`)
 		})

@@ -33,11 +33,10 @@ class FridgesController < ApplicationController
   # POST /fridges.json
   def create
     @fridge = Fridge.new(fridge_params)
-
     respond_to do |format|
       if @fridge.save
         format.html { redirect_to @fridge, notice: 'Fridge was successfully created.' }
-        format.json { render :show, status: :created, location: @fridge }
+        format.json { render json: @fridge, status: 201 }
       else
         format.html { render :new }
         format.json { render json: @fridge.errors, status: :unprocessable_entity }
