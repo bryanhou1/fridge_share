@@ -224,7 +224,7 @@ class Fridge {
 			<form id="new_fridge_comment">
 				<input type="hidden" value="${this.id}" name="fridge_comment[fridge_id]" />
 				<label for="fridge_comment[comment]">New Comment:</label>
-				<textarea id="fridge_comment[comment]" name="fridge_comment[comment]">test</textarea>
+				<textarea id="fridge_comment[comment]" name="fridge_comment[comment]"></textarea>
 				<br/>
 				<input type="submit" data-fridge-id="${this.id}" />
 			</form>
