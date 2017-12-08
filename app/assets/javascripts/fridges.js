@@ -123,12 +123,20 @@ function addEditFridgeSubmitListener(){
 			data: fridgeData,
 			contentType: "application/x-www-form-urlencoded",
 			dataType: "json",
-		}).done(() => {
+		}).done((data) => {
 			updateFridges().done(showFridges);
-
-			//put in functions later
+			$("#display_fridge_form").empty();
 			$("#display_fridge").html("");
-			$("div#messages_container").html("");
+			$("div#messages_container").html(`Fridge successfully updated.`);
+		}).fail((data) => {
+			let message = `New fridge creation failed.<br><br> Errors: <br><ul>`
+
+			$.each(data.responseJSON, (key, item) => {
+         message += `<li>${key} - ${item}</li>`;
+      });
+      message += "</ul>"
+			
+			$("div#messages_container").html(message)
 		})
 	})
 }
