@@ -46,8 +46,15 @@ function addNewItemSubmitListener() {
 					$("div#item_details_container").empty();
 				});
 			})
-			.fail(() => {
-				//fill in
+			.fail((data) => {
+				let message = `New item creation failed.<br><br> Errors: <br><ul>`
+
+				$.each(data.responseJSON, (key, item) => {
+            message += `<li>${key} - ${item}</li>`;
+        });
+        message += "</ul>"
+				
+				$("div#messages_container").html(message)
 			})
 	})
 }
@@ -89,9 +96,15 @@ function addEditItemSubmitListener() {
 				$("div#item_details_container").empty();
 				updateItems().done(showItems)
 			})
-			.fail(() => {
-				//detail fail messages
-				$("div#messages_container").html(`updated Item ${itemId} failed.`)
+			.fail((data) => {
+				let message = `Update Item ${itemId} failed.<br><br> Errors: <br><ul>`
+
+				$.each(data.responseJSON, (key, item) => {
+            message += `<li>${key} - ${item}</li>`;
+        });
+        message += "</ul>"
+				
+				$("div#messages_container").html(message)
 			})
 	})
 }
@@ -218,24 +231,21 @@ class Item {
 	}
 
 	static userSelectButton(userId = -1) {
-		// const userId = this.user.id;
 		const html = '<select name="item[user_id]" id="item[user_id]">' + 
-		store.getState().users.map(user => `
-			<option ${user.id == userId ? "selected":""} value=${user.id}>
-				${user.id} - ${user.name}
-			</option>`
-		) +
-		'</select>'
+			store.getState().users.map(user => `
+				<option ${user.id == userId ? "selected":""} value=${user.id}>
+					${user.id} - ${user.name}
+				</option>`) +'</select>'
+
     return html;
 	}
 
 	static fridgeSelectButton(fridgeId = -1) {
-		// const fridgeId = this.fridge.id;
 		const html = '<select name="item[fridge_id]" id="item[fridge_id]"><option value="">Add new</option>'+
-		''+ store.getState().fridges.map(fridge => {
-			return `<option ${fridge.id == fridgeId ? "selected":""} value=${fridge.id}>${fridge.id} - ${fridge.name}</option>`
-		})+
-		'</select>'
+			store.getState().fridges.map(fridge => {
+				return `<option ${fridge.id == fridgeId ? "selected":""} value=${fridge.id}>${fridge.id} - ${fridge.name}</option>`
+			})+'</select>';
+
 		return html;
 	}
 }
