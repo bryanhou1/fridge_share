@@ -12,7 +12,8 @@ function hideBtn(btn) {
 
 function getFridges() {
 	return $.get("/fridges.json", fridges => {
-		store.state.fridges = fridges.map(attributes => new Fridge(attributes))
+		const fridgesObj = {fridges: fridges.map(attributes => new Fridge(attributes))}
+		store.dispatch({type: "GET_ITEMS", payload: fridgesObj})
 	})
 }
 

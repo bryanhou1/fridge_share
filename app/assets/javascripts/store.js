@@ -15,12 +15,18 @@ function configureStore () {
 	
 	function reducer(state, action) {
 		switch (action.type) {
-			case "ADD_FRIDGES":
-				return {...state, action.payload};
-			case "ADD_ITEMS":
-				return {...state, action.payload};
-			case "ADD_USERS":
-				return {...state, action.payload};
+			case "GET_FRIDGES":
+				return Object.assign(state, action.payload);
+			case "GET_ITEMS":
+				return Object.assign(state, action.payload);
+			case "GET_USERS":
+				return Object.assign(state, action.payload);
+			// case "ADD_FRIDGES":
+			// 	return Object.assign(state, action.payload);
+			// case "ADD_ITEMS":
+			// 	return Object.assign(state, action.payload);
+			// case "ADD_USERS":
+			// 	return Object.assign(state, action.payload);
 			default:
 				return state;
 		}

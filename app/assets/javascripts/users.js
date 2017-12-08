@@ -8,6 +8,7 @@ class User {
 
 function getUsers() {
 	return $.get("/users.json", users => {
-		store.state.users = users.map(attr => new User(attr))
+		const usersCollect = {users: users.map(attr => new User(attr))}
+		store.dispatch({type: "GET_USERS", payload: usersCollect})
 	})
 }

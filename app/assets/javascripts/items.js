@@ -8,9 +8,10 @@ $(() => {
 	}
 });
 
-function getItems() {
+function getItems() {	
 	return $.get("/items.json", items => {
-		store.state.items = items.map(attributes => new Item(attributes))
+		const itemsCollect = {items: items.map(attributes => new Item(attributes))}
+		store.dispatch({type: "GET_ITEMS", payload: itemsCollect})
 	})
 }
 
@@ -46,11 +47,11 @@ function addNewItemSubmitListener() {
 					$("div#item_details_container").empty();
 				});
 			})
-			.fail((data) => {
+			.fail(data => {
 				let message = `New item creation failed.<br><br> Errors: <br><ul>`
 
 				$.each(data.responseJSON, (key, item) => {
-            message += `<li>${key} - ${item}</li>`;
+           message += `<li>${key} - ${item}</li>`;
         });
         message += "</ul>"
 				
