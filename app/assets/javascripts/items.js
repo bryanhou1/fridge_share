@@ -155,7 +155,7 @@ class Item {
 	}
 
 	expired(exp_date) {
-		if(new Date("20"+ exp_date.slice(4,6), exp_date.slice(0,2)-1, exp_date.slice(2,4)) > new Date()) {
+		if(new Date("20"+ exp_date.slice(4,6), exp_date.slice(0,2)-1, exp_date.slice(2,4)) < new Date()) {
 			return true;
 		} else {
 			return false;
@@ -206,12 +206,17 @@ class Item {
 	}
 
 	optionBtns() {
+		const currentUserId = $("body").data().currentUserId
+		let html = `<a class="show_item_btn" data-item-id="${this.id}">Show</a>`
 
-		return `
-			<a class="show_item_btn" data-item-id="${this.id}">Show</a> | 
-			<a class="edit_item_btn" data-item-id="${this.id}">Edit</a> | 
-			<a class="destroy_item_btn" data-item-id="${this.id}">Destroy</a>
-		`
+		if (currentUserId === this.user.id) {
+			html += ` | <a class="edit_item_btn" data-item-id="${this.id}">Edit</a>`
+		} 
+		if (this.expired || currentUserId === this.user.id) {
+			html += ` | <a class="destroy_item_btn" data-item-id="${this.id}">Destroy</a>`
+		}
+
+		return html;
 	}
 
 	editItemForm() {

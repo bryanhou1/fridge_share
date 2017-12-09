@@ -11,7 +11,7 @@
     <%= javascript_include_tag 'application'%>
   </head>
 	
-  <body>
+  <body data-current-user-id=<%= current_user.id%>>
   	<%= render 'layouts/header' %>
     <%= render 'layouts/messages' %>
 
