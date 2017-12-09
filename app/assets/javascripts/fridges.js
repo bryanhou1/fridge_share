@@ -17,14 +17,6 @@ function getFridges() {
 	})
 }
 
-// function get(url, cb) {
-
-// 	...do something with url and when it has the info it needs after a perido of time it will pass it to the callback function argument. 
-
-// 	setTimeout(() => {
-// 		cb('something')
-// 	}, 3000)
-// }
 
 function showFridges() {
 	const element = $("ul#fridges_li");

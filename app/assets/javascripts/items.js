@@ -151,9 +151,16 @@ class Item {
 		this.expiration_date = attr.expiration_date;
 		this.user = attr.user;
 		this.fridge = attr.fridge;
-		// this.expired 
+		this.expired = this.expired(attr.expiration_date);
 	}
 
+	expired(exp_date) {
+		if(new Date("20"+ exp_date.slice(4,6), exp_date.slice(0,2)-1, exp_date.slice(2,4)) > new Date()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	static newItemForm() {
 		return `
 		<h2>New Item</h2>
@@ -188,18 +195,18 @@ class Item {
 
 	toHtmlLi(){
 		// write logic to display "show edit or destroy"
-		const expired = true; //write later
 		return `
 			<li>
 				<h4> ${this.name} </h4> 
 
-				Expiration Date: ${this.expiration_date} <br>
+				Expiration Date: ${this.expiration_date} <br> ${this.expired ? "Expired!<br>" : ""}
 				Belongs to: <a href="/users/${this.user.id}">${this.user.name}</a> <br>
 				${this.optionBtns()}
 			</li>`;
 	}
 
 	optionBtns() {
+
 		return `
 			<a class="show_item_btn" data-item-id="${this.id}">Show</a> | 
 			<a class="edit_item_btn" data-item-id="${this.id}">Edit</a> | 
