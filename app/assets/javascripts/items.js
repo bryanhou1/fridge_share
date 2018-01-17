@@ -51,9 +51,9 @@ function addNewItemSubmitListener() {
 				let message = `New item creation failed.<br><br> Errors: <br><ul>`
 
 				$.each(data.responseJSON, (key, item) => {
-           message += `<li>${key} - ${item}</li>`;
+            message += `<li>${key} - ${item}</li>`;
         });
-        message += "</ul>"
+       	message += "</ul>" 
 				
 				$("div#messages_container").html(message)
 			})
@@ -129,7 +129,8 @@ function destroyItemListener() {
 			.done(() => {
 				$("div#messages_container").html(`Item ${itemId} deleted.`)
 				$("div#item_details_container").empty();
-				updateItems().done(showItems)
+				store.dispatch({ type: 'REMOVE_ITEM', itemId: itemId })
+				showItems()
 			})
 		}
 		

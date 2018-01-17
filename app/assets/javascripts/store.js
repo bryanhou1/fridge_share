@@ -21,6 +21,12 @@ function configureStore () {
 				return Object.assign(state, action.payload);
 			case "GET_USERS":
 				return Object.assign(state, action.payload);
+			case "REMOVE_ITEM":
+				const index = state.items.findIndex(item => item.id === action.itemId )
+				return Object.assign(state, {items: [
+					...state.items.slice(0, index), 
+					...state.items.slice(index + 1)
+				]});
 			// case "ADD_FRIDGES":
 			// 	return Object.assign(state, action.payload);
 			// case "ADD_ITEMS":
