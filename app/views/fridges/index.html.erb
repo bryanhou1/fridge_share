@@ -1,18 +1,26 @@
 
-<div class="row">
-  <div class="col-5">
+
+<div class="container">
+  <div class="row">
     <h1>Fridges</h1>
-    <ul id="fridges_li" ></ul>
   </div>
-  <div class="col-5" id="display_fridge"></div>
-  <div class="col-2"  id="messages_container"></div>
-</div>
-<div class="row">
-    <%= link_to 'New Fridge', new_fridge_path %> | 
-    <a href="#" id="new_fridge_btn">New fridge on page</a>
-</div>
-<div class="row">
-  <div class="col-3" id="display_fridge_form"></div>
+  <div class="row">
+    <div class="col-1">
+      <a href="#" id="new_fridge_btn" class="btn btn-secondary btn-sm">New fridge</a>
+    </div>
+  </div>
+  <div class="row">
+      <div id="messages_container"></div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <ul id="fridges_li" class="list-unstyled d-flex flex-wrap align-content-center"></ul>
+    </div>
+    <div class="col-8">
+      <div id="display_fridge"></div>
+      <div id="display_fridge_form"></div>
+    </div>
+  </div>
 </div>
 
 <!-- <table border=1 bordercolor=black>

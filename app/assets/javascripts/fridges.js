@@ -21,7 +21,6 @@ function getFridges() {
 function showFridges() {
 	const element = $("ul#fridges_li");
 	const fridgeElements = store.getState().fridges.reduce((pre, next) =>  pre + next.toHtmlLi(), "");
-
 	element.empty();
 	element.append(fridgeElements)
 
@@ -50,6 +49,7 @@ function editFridgeListener() {
 function displayFridge(fridge){
 	const fridgeHTML = fridge.toDetailedView();
 	$("div#display_fridge").html(fridgeHTML);
+	$("#fridge_comment\\[comment\\]").focus();
 }
 
 function addNewFridgeBtnListener() {
@@ -65,12 +65,12 @@ function displayEditFridgeForm(fridge) {
 	<h2>Edit Fridge ${fridge.id}</h2>
 	<form id="edit_fridge_form" data-fridge-id="${fridge.id}">
 	  <label for="fridge[name]">Name:</label>
-	  <input type="text" name="fridge[name]" id="fridge[name]" value="${fridge.name}">
-	  <br>
-	  <input type="submit" value="update">
+	  <input type="text" name="fridge[name]" id="fridge[name]" value="${fridge.name}"><br>
+	  <input class="btn btn-primary" type="submit" value="update">
 	</form>`;
-
 	$("#display_fridge_form").html(edit_fridge_form);
+	$('input#fridge\\[name\\]').focus();
+	;
 }
 
 function displayNewFridgeForm() {
@@ -79,10 +79,11 @@ function displayNewFridgeForm() {
 	<form id="new_fridge_form">
 	  <label for="fridge[name]">Name:</label>
 	  <input type="text" name="fridge[name]" id="fridge[name]"><br>
-	  <input type="submit" value="submit">
+	  <input class="btn btn-primary" type="submit" value="submit">
 	</form>`;
 
 	$("#display_fridge_form").html(new_fridge_form);
+	$("#fridge\\[name\\]").focus();
 }
 
 
@@ -100,7 +101,8 @@ function addNewFridgeSubmitListener() {
         });
         message += "</ul>"
 				
-				$("div#messages_container").html(message)
+				$("#messages_container").html(message).addClass("alert alert-danger alert-dismissible show");
+				// $("div#messages_")
 			})
 	})
 }
@@ -120,16 +122,16 @@ function addEditFridgeSubmitListener(){
 			updateFridges().done(showFridges);
 			$("#display_fridge_form").empty();
 			$("#display_fridge").html("");
-			$("div#messages_container").html(`Fridge successfully updated.`);
+			$("#messages_container").html(`Fridge successfully updated.`);
 		}).fail((data) => {
-			let message = `New fridge creation failed.<br><br> Errors: <br><ul>`
+			let message = `New fridge creation failed.<br><br> Errors: <br><hr><ul>`
 
 			$.each(data.responseJSON, (key, item) => {
          message += `<li>${key} - ${item}</li>`;
       });
       message += "</ul>"
 			
-			$("div#messages_container").html(message)
+			$("#messages_container").html(message)
 		})
 	})
 }
@@ -145,7 +147,7 @@ function addNewFridgeCommentListener(){
 				addNewFridgeCommentListener();
 			});
 			
-			$("div#messages_container").html(`New Comment Added: <br>
+			$("#messages_container").html(`New Comment Added: <br>
 				${data.comment} - ${data.created_at} <br>
 			`)
 		})
@@ -173,29 +175,26 @@ class Fridge {
 		if (this.items.length === 0) {
 			itemsHTML = "<em>No Items yet.</em><br>"
 		} else {
-			itemsHTML = '<ul>';
+			itemsHTML = '<ul class="list-group list-group-flush">';
 			this.items.forEach((item) => {
-				itemsHTML += `<li>ID: ${item.id} <br>
-													Name: ${item.name} <br>
-													Expiration date: ${item.expiration_date}
-											</li>`
+				itemsHTML += `<li class="list-group-item">ID: ${item.id} <br>
+						Name: ${item.name} <br>
+						Expiration date: ${item.expiration_date}
+				</li>`
 			})
 		itemsHTML += "</ul>"
 		}
 
-		
 		let commentsHTML;
 		if (this.comments.length === 0) {
 			commentsHTML = "<em>No Comments yet.</em><br>"
 		} else {
-			commentsHTML = '<ul>';
-
+			commentsHTML = '<ul class="list-group list-group-flush">';
 			this.comments.forEach(comment => {
 				const userName = (comment.user) ? comment.user.name : "<em>guest user</em>";
 
-
-				commentsHTML += `<li>
-					${comment.comment} - ${comment.created_at}<br>
+				commentsHTML += `<li class="list-group-item">
+					"${comment.comment}" - ${comment.created_at.slice(0,10)}<br>
 					By: ${userName}
 				</li>`
 			})
@@ -207,19 +206,26 @@ class Fridge {
 		<div>
 			Fridge ID: ${this.id} <br />
 			Name: ${this.name} <br />
-			Items: 
-			${itemsHTML}
-			<br />
-			Comments:
-			${commentsHTML}
-			<br />
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						Items: 
+						${itemsHTML}
+					</div>
+					<div class="col-6">
+						Comments:
+						${commentsHTML}
+					</div>
+				</div>
+			</div>
 
 			<form id="new_fridge_comment">
-				<input type="hidden" value="${this.id}" name="fridge_comment[fridge_id]" />
-				<label for="fridge_comment[comment]">New Comment:</label>
-				<textarea id="fridge_comment[comment]" name="fridge_comment[comment]"></textarea>
-				<br/>
-				<input type="submit" data-fridge-id="${this.id}" />
+				<div class="form-group">
+					<input type="hidden" value="${this.id}" name="fridge_comment[fridge_id]" />
+					<label for="fridge_comment[comment]">New Comment:</label>
+					<input type="text" class="form-control" id="fridge_comment[comment]" name="fridge_comment[comment]"><br/>
+				</div>
+				<input type="submit" class="btn btn-primary" data-fridge-id="${this.id}" />
 			</form>
 			<br />
 			<br />
@@ -227,14 +233,13 @@ class Fridge {
 	}
 
 	toHtmlLi() {
-		return `<li id="fridge-${this.id}">
-			Fridge ID: ${this.id} <br />
-			Name: ${this.name} <br />
-			<a href="fridges/${this.id}">Show</a> | 
-			<a class="show_fridge_btn" data-fridge-id="${this.id}">Show on Page</a> | 
-			<a href="fridges/${this.id}/edit">Edit</a> | 
-			<a class="edit_fridge_btn" data-fridge-id="${this.id}">Edit on Page</a>
-			<br /><br />
+		return `<li id="fridge-${this.id}" class="m-2 p-1" style="border: 1px black solid">
+			${this.id}. ${this.name} <br />
+			
+			<div class="btn-group btn-group-sm">
+				<a class="btn btn-secondary show_fridge_btn" data-fridge-id="${this.id}">Show</a>
+				<a class="btn btn-secondary edit_fridge_btn" data-fridge-id="${this.id}" >Edit</a>
+			</div>
 		</li>`
 	}
 
