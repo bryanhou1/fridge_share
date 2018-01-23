@@ -1,25 +1,29 @@
-<h1>Users</h1>
+<div class="container">
+  <div class="centered-form mx-auto">
+    <h1>Users</h1>
 
-<table border=1 bordercolor=black>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-			<th colspan="2">Items</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+    <table border=1 bordercolor=black>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Name</th>
+          <th colspan="2">Items</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.name ? user.name: "Not provided" %></td>
-        <td><%= user.items.length %></td>
-        <td><%= link_to 'View', user_items_path(user) %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_registration_path(user) if user.provider.nil? &&current_user == user %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.name ? user.name: "Not provided" %></td>
+            <td><%= user.items.length %></td>
+            <td><%= link_to 'View', user_items_path(user) %></td>
+            <td><%= link_to 'Show', user %></td>
+            <td><%= link_to 'Edit', edit_user_registration_path(user) if user.provider.nil? &&current_user == user %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
