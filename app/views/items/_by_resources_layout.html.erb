@@ -3,8 +3,8 @@
 		<tr>
 			<% resources.each do |resource| %>
 			<th>
-                <%=resource.try(:email) ? "#{resource.name} - #{resource.email}":resource.name %>
-            </th>
+          <%=resource.try(:email) ? "#{resource.name} - #{resource.email}":resource.name %>
+      </th>
 			<% end %>
 		</tr>
 	</thead>
