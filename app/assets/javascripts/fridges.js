@@ -63,9 +63,9 @@ function addNewFridgeBtnListener() {
 function displayEditFridgeForm(fridge) {
 	const edit_fridge_form = `
 	<h2>Edit Fridge ${fridge.id}</h2>
-	<form id="edit_fridge_form" data-fridge-id="${fridge.id}">
+	<form id="edit_fridge_form" data-fridge-id="${fridge.id}" >
 	  <label for="fridge[name]">Name:</label>
-	  <input type="text" name="fridge[name]" id="fridge[name]" value="${fridge.name}"><br>
+	  <input type="text" name="fridge[name]" id="fridge[name]" value="${fridge.name}" class="form-control"><br>
 	  <input class="btn btn-primary" type="submit" value="update">
 	</form>`;
 	$("#display_fridge_form").html(edit_fridge_form);
@@ -78,7 +78,7 @@ function displayNewFridgeForm() {
 	<h2>New Fridge</h2>
 	<form id="new_fridge_form">
 	  <label for="fridge[name]">Name:</label>
-	  <input type="text" name="fridge[name]" id="fridge[name]"><br>
+	  <input type="text" name="fridge[name]" id="fridge[name]" class="form-control"><br>
 	  <input class="btn btn-primary" type="submit" value="submit">
 	</form>`;
 

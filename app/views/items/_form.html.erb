@@ -15,12 +15,12 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, id: :item_name %>
+    <%= f.text_field :name, id: :item_name, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :expiration_date %>
-    <%= f.text_field :expiration_date, id: :item_expiration_date %>
+    <%= f.text_field :expiration_date, id: :item_expiration_date, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -35,18 +35,18 @@
         
   <div class="field">
     <%= f.label "Fridge: " %>
-    <%= f.collection_select :fridge_id, Fridge.all, :id, :fridge_form_identifier, {selected: @item.fridge.try(:id), include_blank: "Add new" } %>
+    <%= f.collection_select :fridge_id, Fridge.all, :id, :fridge_form_identifier, {selected: @item.fridge.try(:id), include_blank: "Add new"}, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.fields_for :fridge_attributes do |fridge_fields| %>
         <%= fridge_fields.label "Create new fridge to place item:" %></br>
-        <%= fridge_fields.text_field :name %></br>
+        <%= fridge_fields.text_field :name, class: "form-control" %></br>
     <% end %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(nil,{class: "btn btn-primary"}) %>
   </div>
 
 <% end %>

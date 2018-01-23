@@ -32,7 +32,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= submit_tag("Destroy all expired above", class: "btn-xs") if user_signed_in? &&has_expired_item %>
+    <%= submit_tag("Destroy all expired above", class: "btn btn-secondary btn-sm") if user_signed_in? &&has_expired_item %>
   <% end %>
 
 <% end %>

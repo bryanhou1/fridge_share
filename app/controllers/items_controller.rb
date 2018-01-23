@@ -4,13 +4,14 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+
     if params[:user_id]
       @items = Item.where(user_id: params[:user_id])
       @user = User.find(params[:user_id])
     else
       @items = Item.all
     end
-
+    
     respond_to do |format|
       format.html {render :index }
       format.json {render json: @items }

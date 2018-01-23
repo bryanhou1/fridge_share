@@ -1,5 +1,5 @@
 $(() => {
-	if (window.location.pathname.match(/^\/items/)){
+	if (window.location.pathname.match(/(^\/items|^\/users\/\d*\/items)/)){
 			$.when(getFridges(),getItems(),getUsers())
 				.done(() => {
 					showItems();
@@ -8,8 +8,10 @@ $(() => {
 	}
 });
 
-function getItems() {	
-	return $.get("/items.json", items => {
+function getItems() {
+  const user_id = (window.location.pathname.match(/^\/users/)) ? parseInt(window.location.pathname.split("/")[2], 10) : undefined;
+
+	return $.get("/items.json", {user_id: user_id }, items => {
 		const itemsCollect = {items: items.map(attributes => new Item(attributes))}
 		store.dispatch({type: "GET_ITEMS", payload: itemsCollect})
 	})
@@ -167,10 +169,10 @@ class Item {
 		<h2>New Item</h2>
 		<form id="new_item_form">
 		  <label for="item[name]">Name:</label>
-		  <input type="text" name="item[name]" id="item[name]">
+		  <input type="text" name="item[name]" id="item[name]" class="form-control">
 		  <br>
 			<label for="item[expiration_date]">Expiration date:</label>
-  		<input id="item[expiration_date]" type="text" name="item[expiration_date]">
+  		<input id="item[expiration_date]" type="text" name="item[expiration_date]" class="form-control">
 			<br>
 	    <label for="item[user_id]">Belongs to: </label>
 			${this.userSelectButton()}
@@ -179,8 +181,8 @@ class Item {
 			${this.fridgeSelectButton()}
 		 	
 			<label for="item_fridge_attributes_Create new fridge to place item:">Create new fridge to place item:</label><br>
-			<input type="text" name="item[fridge_attributes][name]" id="item_fridge_attributes_name"><br>
-		  <input type="submit" value="Create New">
+			<input type="text" name="item[fridge_attributes][name]" id="item_fridge_attributes_name" class="form-control"><br>
+		  <input type="submit" class="btn btn-primary" value="Create New">
 		</form>`
 	}
 
@@ -245,7 +247,7 @@ class Item {
 	}
 
 	static userSelectButton(userId = -1) {
-		const html = '<select name="item[user_id]" id="item[user_id]">' + 
+		const html = '<select name="item[user_id]" id="item[user_id]" class="form-control">' + 
 			store.getState().users.map(user => `
 				<option ${user.id == userId ? "selected":""} value=${user.id}>
 					${user.id} - ${user.name}
@@ -255,7 +257,7 @@ class Item {
 	}
 
 	static fridgeSelectButton(fridgeId = -1) {
-		const html = '<select name="item[fridge_id]" id="item[fridge_id]"><option value="">Add new</option>'+
+		const html = '<select name="item[fridge_id]" id="item[fridge_id]" class="form-control"><option value="">Add new</option>'+
 			store.getState().fridges.map(fridge => {
 				return `<option ${fridge.id == fridgeId ? "selected":""} value=${fridge.id}>${fridge.id} - ${fridge.name}</option>`
 			})+'</select>';
